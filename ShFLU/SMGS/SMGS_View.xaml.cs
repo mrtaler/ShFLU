@@ -10,26 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ShFLU.SMGS;
 
-namespace ShFLU
+namespace ShFLU.SMGS
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для SMGS_View.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SMGS_View : Window
     {
-        public MainWindow()
+        public SMGS_View()
         {
+            DataContext = new SmgsViewModel();
             InitializeComponent();
-        }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            SMGS_View smgs = new SMGS_View();
-            smgs.ShowDialog();
         }
     }
 }
