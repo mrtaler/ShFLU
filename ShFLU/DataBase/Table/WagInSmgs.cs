@@ -6,18 +6,20 @@ namespace ShFLU.DataBase.Table
 {
     public class WagInSmgs
     {
-        // [Key, Column(Order = 0)]
         public int WagonSmgsId { get; set; }
-        //  [Key, Column(Order = 1)]
         public int SmgsNaklWagId { get; set; }
         /// <summary>
         /// Wagon
         /// </summary>
-        public virtual Wagon WagonSmgs { get; set; }
+        public virtual Wagon Wagon { get; set; }
         /// <summary>
         /// SMGS
         /// </summary>
-        public virtual SmgsNakl SmgsNaklWag { get; set; }
+        public virtual SmgsNakl SmgsNakl { get; set; }
+        
+        
+        
+        
         /// <summary>
         /// Tara from SMGS
         /// </summary>
@@ -26,6 +28,12 @@ namespace ShFLU.DataBase.Table
         /// weight Brutto
         /// </summary>
         public string Weightb { get; set; }
+        /// <summary>
+        /// Netto
+        /// </summary>
+        public string Weight { get; set; }
+
+
 
     }
 
@@ -33,6 +41,7 @@ namespace ShFLU.DataBase.Table
     {
         public WagInSmgsConfiguration()
         {
+            this.ToTable("WagInSmgs", "dbo");
             //primary key
             this.HasKey(q =>
             new
@@ -41,11 +50,11 @@ namespace ShFLU.DataBase.Table
                 q.SmgsNaklWagId
             });
 
-            this.HasRequired(t => t.WagonSmgs)
-                .WithMany(t => t.WagInSmgs)
+            this.HasRequired(t => t.Wagon)
+                .WithMany(t => t.WagInSmgses)
                 .HasForeignKey(t => t.WagonSmgsId);
 
-            this.HasRequired(t => t.SmgsNaklWag)
+            this.HasRequired(t => t.SmgsNakl)
                .WithMany(t => t.WagInSmgses)
                .HasForeignKey(t => t.SmgsNaklWagId);
 

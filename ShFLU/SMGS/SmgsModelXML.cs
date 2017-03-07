@@ -32,29 +32,31 @@ namespace ShFLU.SMGS
             doc.LoadXml(reg);
 
             XDocument xdoc = XDocument.Parse(doc.OuterXml);
-            SmgsNakl smgsNak = new SmgsNakl();
+            SmgsNakl smgsNak = null;
             foreach (XElement smgsXElement in xdoc.Root.Elements("table"))
             {
                 if (smgsXElement.FirstAttribute.Value == "nakl")
                 {
                     //smgsNak.Smgs = Convert.ToInt32(smgsXElement.Element("data").Element("smgs").Value);
                     var smgs = Convert.ToInt32(smgsXElement.Element("data").Element("smgs").Value);
-                    
-                    var insertSmgs = context.SmgsNaklDbSet.FirstOrDefault(p => p.Smgs == smgs);
-                    if (insertSmgs!=null)
+
+                    smgsNak = context.SmgsNaklDbSet.FirstOrDefault(p => p.Smgs == smgs);
+                    if (smgsNak == null)
                     {
-                        smgsNak = context.SmgsNaklDbSet.FirstOrDefault(p => p.Smgs == smgs);
-                    }
-                    else
-                    {
+                        smgsNak = new SmgsNakl();
                         smgsNak.Smgs = Convert.ToInt32(smgsXElement.Element("data").Element("smgs").Value);
                         smgsNak.Smgsdat = Convert.ToDateTime(smgsXElement.Element("data").Element("smgsdat").Value);
+                        smgsNak.mnet = smgsXElement.Element("data").Element("mnet").Value;
+                        smgsNak.mbrt = smgsXElement.Element("data").Element("mbrt").Value;
                     }
-                  
+
                 }
                 if (smgsXElement.FirstAttribute.Value == "nakl_gruz")
                 {
                     smgsNak.Etsngn = smgsXElement.Element("data").Element("etsngn").Value;
+                    smgsNak.gngc = smgsXElement.Element("data").Element("gngc").Value;
+                    smgsNak.gngn = smgsXElement.Element("data").Element("gngn").Value;
+                    smgsNak.etsngc = smgsXElement.Element("data").Element("etsngc").Value;
                 }
                 if (smgsXElement.FirstAttribute.Value == "nakl_vag")
                 {
@@ -62,7 +64,7 @@ namespace ShFLU.SMGS
                     {
                         int vagnum = Convert.ToInt32(vagonItem.Element("nwag").Value);
                         var insertWag = context.WagonDbSet.FirstOrDefault(p => p.Nwag == vagnum);
-                        
+
                         if (insertWag == null)
                         {
                             Wagon wag = new Wagon
@@ -78,19 +80,35 @@ namespace ShFLU.SMGS
                         {
                             insertWag.Nwag = Convert.ToInt32(vagonItem.Element("nwag").Value);
                             insertWag.Ownerc = vagonItem.Element("ownerc").Value;
-                            insertWag.Gp =vagonItem.Element("gp").Value;
+                            insertWag.Gp = vagonItem.Element("gp").Value;
                             insertWag.Tara = vagonItem.Element("tara").Value;
                         }
 
-                        WagInSmgs wgs = new WagInSmgs();
-                        wgs.WagonSmgs = context.WagonDbSet.Local.FirstOrDefault(p => p.Nwag == vagnum);
-                        wgs.Tarapr = vagonItem.Element("tarapr").Value;
-                        wgs.Weightb =vagonItem.Element("weightb").Value;
-                        smgsNak.WagInSmgses.Add(wgs);
+                        if (smgsNak.Id == 0)
+                        {
+                            WagInSmgs wgs = new WagInSmgs();
+                            wgs.Wagon = context.WagonDbSet.Local.FirstOrDefault(p => p.Nwag == vagnum);
+                            wgs.Tarapr = vagonItem.Element("tarapr").Value;
+                            wgs.Weightb = vagonItem.Element("weightb").Value;
+                            wgs.Weight = vagonItem.Element("weight").Value;
+                            smgsNak.WagInSmgses.Add(wgs);
+                        }
+                        else
+                        {
+                            WagInSmgs wgs = smgsNak.WagInSmgses.First(p => p.Wagon.Nwag == vagnum);
+                            wgs.Wagon = context.WagonDbSet.Local.FirstOrDefault(p => p.Nwag == vagnum);
+                            wgs.Tarapr = vagonItem.Element("tarapr").Value;
+                            wgs.Weightb = vagonItem.Element("weightb").Value;
+                            wgs.Weight = vagonItem.Element("weight").Value;
+                        }
                     }
                 }
             }
-            context.SmgsNaklDbSet.Add(smgsNak);
+            if (smgsNak.Id == 0)
+            {
+                context.SmgsNaklDbSet.Add(smgsNak);
+            }
+
             context.SaveChanges();
         }
     }

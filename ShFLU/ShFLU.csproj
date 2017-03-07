@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="AllWag\AllWagViewModel.cs" />
     <Compile Include="DataBase\PropertyConfigurationExtensions.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MVVM\ViewModelBase.cs" />
     <Compile Include="MVVM\ViewModelCommand.cs" />
     <Compile Include="SMGS\allsmgs\allSmgsView.xaml.cs">
@@ -157,6 +158,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="DataBase\MigrationCommand.txt" />
     <Content Include="DataBase\Wagon.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

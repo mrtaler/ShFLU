@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ShFLU.SMGS;
+using ShFLY.AllWag;
+using ShFLY.SMGS;
 
 namespace ShFLU
 {
@@ -30,6 +32,17 @@ namespace ShFLU
         {
             SMGS_View smgs = new SMGS_View();
             smgs.ShowDialog();
+        }
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            AlllWagView allWag = new AlllWagView();
+            allWag.Show();
+        }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            allSmgsView allsmgs = new allSmgsView();
+            allsmgs.ShowDialog();
         }
     }
 }

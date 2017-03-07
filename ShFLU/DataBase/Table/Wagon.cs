@@ -14,7 +14,7 @@ namespace ShFLU.DataBase.Table
         /// </summary>
         public Wagon()
         {
-            this.WagInSmgs = new HashSet<WagInSmgs>();
+            this.WagInSmgses = new HashSet<WagInSmgs>();
         }
         public int Id { get; set; }
         /// <summary>
@@ -36,13 +36,14 @@ namespace ShFLU.DataBase.Table
         /// <summary>
         /// wagon include in smgs
         /// </summary>
-        public virtual ICollection<WagInSmgs> WagInSmgs { get; set; }
+        public virtual ICollection<WagInSmgs> WagInSmgses { get; set; }
     }
 
     public class WagonConfiguration : EntityTypeConfiguration<Wagon>
     {
         public WagonConfiguration()
         {
+            this.ToTable("Wagon", "dbo");
             this.HasKey(p => p.Id);//primary key
             this.Property(b => b.Nwag).IsUnique();
 

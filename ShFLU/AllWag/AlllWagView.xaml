@@ -4,11 +4,11 @@
         Title="AlllWagView" Height="285" Width="554">
     <Grid>
         <DataGrid AutoGenerateColumns="False" Margin="12,12,12,38" Name="dataGrid1" 
-                  ItemsSource="{Binding AllWag, Mode=TwoWay}"                  >
+                  ItemsSource="{Binding AllWag, Mode=TwoWay}"              CanUserAddRows="False"    >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="Id"
                                     Binding="{Binding Path=Id}"
-                                    Header="Name"
+                                    Header="Id"
                                     IsReadOnly="True" />
                 <DataGridTextColumn x:Name="Nwag"
                                     Binding="{Binding Path=Nwag}"

@@ -1,0 +1,5 @@
+﻿Enable-Migrations -ProjectName "ShFLU" -StartUpProjectName "ShFLU" 
+Add-Migration   -ProjectName "ShFLU"
+Update-Database -ProjectName "ShFLU" -verbose
+
+Update-Database -TargetMigration 201701141825075_4m -ProjectName "GurpsDb"

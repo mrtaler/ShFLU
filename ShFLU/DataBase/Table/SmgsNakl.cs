@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShFLU.DataBase.Table
 {
+    
     public class SmgsNakl
     {
         /// <summary>
@@ -26,9 +27,29 @@ namespace ShFLU.DataBase.Table
         /// </summary>
         public DateTime Smgsdat { get; set; }
         /// <summary>
-        /// ETSNG Number
+        /// GNG number
+        /// </summary>
+        public string gngc { get; set; }
+        /// <summary>
+        /// GNG Text
+        /// </summary>
+        public string gngn { get; set; }
+        /// <summary>
+        /// ETSNG number
+        /// </summary>
+        public string etsngc { get; set; }
+        /// <summary>
+        /// ETSNG Text
         /// </summary>
         public string Etsngn { get; set; }
+        /// <summary>
+        /// Mass of netto
+        /// </summary>
+        public string mnet { get; set; }
+        /// <summary>
+        /// Mass of Brutto
+        /// </summary>
+        public string mbrt { get; set; }
         /// <summary>
         /// SMGS Wagon
         /// </summary>
@@ -38,6 +59,7 @@ namespace ShFLU.DataBase.Table
     {
         public SmgsNaklConfiguration()
         {
+            this.ToTable("SmgsNakl", "dbo");
             this.HasKey(p => p.Id);//primary key
 
             this.Property(b => b.Smgs).IsUnique();
