@@ -20,5 +20,15 @@ namespace ShFLU.DataBase
         public virtual DbSet<WagInSmgs> WagInSmgsDbSet { get; set; }
         public virtual DbSet<Wagon> WagonDbSet { get; set; }
 
+
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new SmgsNaklConfiguration());
+            modelBuilder.Configurations.Add(new WagonConfiguration());
+            modelBuilder.Configurations.Add(new WagInSmgsConfiguration());
+
+        }
     }
+
 }

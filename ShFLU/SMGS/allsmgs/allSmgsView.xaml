@@ -1,0 +1,42 @@
+﻿<Window x:Class="ShFLY.SMGS.allSmgsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="allSmgsView" Height="319" Width="516">
+    <Grid>
+        <ListBox Margin="12,12,335,31" Name="listBox1" ItemsSource="{Binding AllSmgsNakl}"
+                  DisplayMemberPath="Smgs"
+                 SelectedItem="{Binding SelectSmgs,
+                                        UpdateSourceTrigger=PropertyChanged}"></ListBox>
+        <DataGrid AutoGenerateColumns="False" Margin="0,12,12,31" Name="dataGrid1" HorizontalAlignment="Right" Width="307"   
+                  ItemsSource="{Binding AllWagInSmgs, Mode=OneWay}"                  >
+            <DataGrid.Columns>        
+                <DataGridTextColumn x:Name="Nwag"
+                                    Binding="{Binding Path=WagonSmgs.Nwag}"
+                                    Header="Nwag"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn x:Name="Tarapr"
+                                    Binding="{Binding Path=Tarapr}"
+                                    Header="Tarapr"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn x:Name="Weightb"
+                                    Binding="{Binding Path=Weightb}"
+                                    Header="Weightb"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn x:Name="Ownerc"
+                                    Binding="{Binding Path=WagonSmgs.Ownerc}"
+                                    Header="Ownerc"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn x:Name="Gp"
+                                    Binding="{Binding Path=WagonSmgs.Gp}"
+                                    Header="Gp"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn x:Name="Tara"
+                                    Binding="{Binding Path=WagonSmgs.Tara}"
+                                    Header="Tara"
+                                    IsReadOnly="True" />
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+    </Grid>
+</Window>

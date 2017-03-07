@@ -83,13 +83,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AllWag\AlllWagView.xaml.cs">
+      <DependentUpon>AlllWagView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AllWag\AllWagViewModel.cs" />
+    <Compile Include="DataBase\PropertyConfigurationExtensions.cs" />
     <Compile Include="MVVM\ViewModelBase.cs" />
     <Compile Include="MVVM\ViewModelCommand.cs" />
+    <Compile Include="SMGS\allsmgs\allSmgsView.xaml.cs">
+      <DependentUpon>allSmgsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SMGS\allsmgs\allSmgsViewModel.cs" />
     <Compile Include="SMGS\SmgsModelXML.cs" />
     <Compile Include="SMGS\SMGS_View.xaml.cs">
       <DependentUpon>SMGS_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="SMGS\SmgsViewModel.cs" />
+    <Page Include="AllWag\AlllWagView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -106,6 +119,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SMGS\allsmgs\allSmgsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="SMGS\SMGS_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -7,6 +7,7 @@ using System.Windows;
 using ShFLU.DataBase;
 using ShFLU.MVVM;
 using Microsoft.Win32;
+using ShFLY.SMGS;
 
 namespace ShFLU.SMGS
 {
@@ -29,7 +30,7 @@ namespace ShFLU.SMGS
             string str = "pkc7";
             string filter = "GCS Skill files (*." + str + ")| *." + str + "| All Files(*.*) | *.* ";
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.InitialDirectory = @"C:\Users\Derdan\Dropbox\Work\Matrix";
+            dlg.InitialDirectory = @"D:\ДокументыЛинкевич\ПРИХОД ШФУ\ЕТК\02";
             dlg.Filter = filter;
             dlg.ShowDialog();
             if (dlg.FileName != "")
@@ -44,7 +45,7 @@ namespace ShFLU.SMGS
         private void SerializeSmgs(object param)
         {
             SmgsSeriallXML neSeriallXml = new SmgsSeriallXML(XMLSmgsWagonPatch);
-            MessageBox.Show(" ");
+            MessageBox.Show("done");
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,12 +9,43 @@ namespace ShFLU.DataBase.Table
 {
     public class Wagon
     {
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        public Wagon()
+        {
+            this.WagInSmgs = new HashSet<WagInSmgs>();
+        }
         public int Id { get; set; }
+        /// <summary>
+        /// Wagon number
+        /// </summary>
         public int Nwag { get; set; }
-        public int Ownerc { get; set; }
-        public int Gp { get; set; }
-        public int Tara { get; set; }
-        public List<WagInSmgs> WagInSmgs { get; set; }
+        /// <summary>
+        /// Cod of sobstv
+        /// </summary>
+        public string Ownerc { get; set; }
+        /// <summary>
+        /// gryz pod
+        /// </summary>
+        public string Gp { get; set; }
+        /// <summary>
+        /// Tara of Wagon
+        /// </summary>
+        public string Tara { get; set; }
+        /// <summary>
+        /// wagon include in smgs
+        /// </summary>
+        public virtual ICollection<WagInSmgs> WagInSmgs { get; set; }
+    }
 
+    public class WagonConfiguration : EntityTypeConfiguration<Wagon>
+    {
+        public WagonConfiguration()
+        {
+            this.HasKey(p => p.Id);//primary key
+            this.Property(b => b.Nwag).IsUnique();
+
+        }
     }
 }
