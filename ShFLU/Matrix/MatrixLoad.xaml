@@ -1,0 +1,22 @@
+﻿<Window
+    x:Class="ShFLU.Matrix.MatrixLoad"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ShFLU.Matrix"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MatrixLoad"
+    Width="477.198"
+    Height="300"
+    mc:Ignorable="d">
+    <Grid>
+        <Button
+            x:Name="button"
+            Width="75"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Load Matrix" />
+
+    </Grid>
+</Window>
