@@ -6,17 +6,43 @@
     xmlns:local="clr-namespace:ShFLU.Matrix"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MatrixLoad"
-    Width="477.198"
-    Height="300"
+    Width="723.539"
+    Height="331.707"
     mc:Ignorable="d">
     <Grid>
         <Button
             x:Name="button"
-            Width="75"
+            Width="132"
             Margin="10,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="Load Matrix" />
-
+            Command="{Binding LoadMatrixCommand}"
+            CommandParameter="Tara"
+            Content="Load Matrix tara" />
+        <Button
+            x:Name="button_Copy"
+            Width="132"
+            Margin="10,35,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding LoadMatrixCommand}"
+            CommandParameter="Brutto"
+            Content="Load Matrix brutto" />
+        <DataGrid
+            Width="559"
+            Height="281"
+            Margin="147,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            AutoGenerateColumns="True"
+            ItemsSource="{Binding Matrix.MatrixWagons, Mode=OneWay}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    x:Name="Nwag"
+                    Binding="{Binding Path=Wagon.Nwag}"
+                    Header="Nwag"
+                    IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

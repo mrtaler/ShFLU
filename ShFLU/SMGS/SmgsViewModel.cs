@@ -30,7 +30,9 @@ namespace ShFLU.SMGS
             string str = "pkc7";
             string filter = "GCS Skill files (*." + str + ")| *." + str + "| All Files(*.*) | *.* ";
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.InitialDirectory = @"D:\ДокументыЛинкевич\ПРИХОД ШФУ\ЕТК\02";
+            // dlg.InitialDirectory = @"D:\ДокументыЛинкевич\ПРИХОД ШФУ\ЕТК\02";
+            dlg.InitialDirectory = @"C:\Users\Derdan\Dropbox\Work\Matrix";
+
             dlg.Filter = filter;
             dlg.ShowDialog();
             if (dlg.FileName != "")

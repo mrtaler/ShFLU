@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using ShFLU.SMGS;
 using ShFLY.AllWag;
 using ShFLY.SMGS;
+using ShFLU.Matrix;
 
 namespace ShFLU
 {
@@ -43,6 +44,12 @@ namespace ShFLU
         {
             allSmgsView allsmgs = new allSmgsView();
             allsmgs.ShowDialog();
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            MatrixLoad mxLoad = new MatrixLoad();
+            mxLoad.ShowDialog();
         }
     }
 }

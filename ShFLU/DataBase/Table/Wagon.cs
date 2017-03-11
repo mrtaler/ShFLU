@@ -37,6 +37,7 @@ namespace ShFLU.DataBase.Table
         /// wagon include in smgs
         /// </summary>
         public virtual ICollection<WagInSmgs> WagInSmgses { get; set; }
+        public virtual ICollection<MatrixWagon> MatrixWagons { get; set; }
     }
 
     public class WagonConfiguration : EntityTypeConfiguration<Wagon>
