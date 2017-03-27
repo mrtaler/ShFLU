@@ -18,13 +18,16 @@ namespace ShFLU.Matrix
         private ShFluContext context = new ShFluContext();
         private string MatrixFilePatch;
         public Matrixx Matrix { get; set; }
+
         public ViewModelCommand LoadMatrixCommand { get; set; }
         public ViewModelCommand EditCommand { get; set; }
+        public ViewModelCommand ViewAllCommand { get; set; }
         public MatrixLoadViewModel()
         {
             Matrix = new Matrixx();
             LoadMatrixCommand = new ViewModelCommand(LoadMatrix, true);
             EditCommand = new ViewModelCommand(edit, true);
+            ViewAllCommand = new ViewModelCommand(ViewAll, true);
 
         }
         private void LoadMatrix(object param)
@@ -131,7 +134,12 @@ namespace ShFLU.Matrix
                 }
             }
         }
+        private void ViewAll(object param) {
+            if ((bool)param)
+            {
 
+            }
+        }
         private void edit(object param) {
             MessageBox.Show(param.ToString());
 

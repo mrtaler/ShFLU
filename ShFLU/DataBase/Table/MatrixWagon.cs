@@ -33,8 +33,6 @@ namespace ShFLU.DataBase.Table
         public virtual Matrixx Matrixx { get; set; }
         public int MatrixId { get; set; }
 
-        public
-
     }
     public class MatrixxWagonConfiguration : EntityTypeConfiguration<MatrixWagon>
     {

@@ -35,14 +35,19 @@
             Margin="147,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            AutoGenerateColumns="False"
-            ItemsSource="{Binding Matrix.MatrixWagons, Mode=OneWay}">
+            AutoGenerateColumns="False">
             <DataGrid.InputBindings>
                 <MouseBinding
                     Command="{Binding EditCommand}"
                     CommandParameter="{Binding ElementName=UsersDataGrid, Path=SelectedItem}"
                     Gesture="LeftDoubleClick" />
             </DataGrid.InputBindings>
+            <DataGrid.ItemsSource>
+                <MultiBinding Converter="{local:EmptyWagonConverter}">
+                    <Binding Path=" Matrix.MatrixWagons" />
+                    <Binding ElementName="AllCheckBox" Path="IsChecked" />
+                </MultiBinding>
+            </DataGrid.ItemsSource>
 
 
             <DataGrid.Columns>
@@ -71,5 +76,13 @@
 
             </DataGrid.Columns>
         </DataGrid>
+        <CheckBox
+            Name="AllCheckBox"
+            Margin="10,60,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding ViewAllCommand}"
+            CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}, Mode=OneWay}"
+            Content="All" />
     </Grid>
 </Window>
