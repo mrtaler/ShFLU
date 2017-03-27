@@ -29,19 +29,46 @@
             CommandParameter="Brutto"
             Content="Load Matrix brutto" />
         <DataGrid
+            Name="UsersDataGrid"
             Width="559"
             Height="281"
             Margin="147,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            AutoGenerateColumns="True"
-            ItemsSource="{Binding Matrix.MatrixWagons, Mode=OneWay}" >
+            AutoGenerateColumns="False"
+            ItemsSource="{Binding Matrix.MatrixWagons, Mode=OneWay}">
+            <DataGrid.InputBindings>
+                <MouseBinding
+                    Command="{Binding EditCommand}"
+                    CommandParameter="{Binding ElementName=UsersDataGrid, Path=SelectedItem}"
+                    Gesture="LeftDoubleClick" />
+            </DataGrid.InputBindings>
+
+
             <DataGrid.Columns>
                 <DataGridTextColumn
-                    x:Name="Nwag"
-                    Binding="{Binding Path=Wagon.Nwag}"
-                    Header="Nwag"
+                    x:Name="numpp"
+                    Binding="{Binding Path=WagonNumberPP}"
+                    Header="#pp"
                     IsReadOnly="True" />
+                <DataGridTextColumn
+                    x:Name="WagonNumberMatrix"
+                    Binding="{Binding Path=WagonNumberMatrix}"
+                    Header="WagonNumberMatrix"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    x:Name="Speed"
+                    Binding="{Binding Path=Speed}"
+                    Header="Speed"
+                    IsReadOnly="True" />
+
+                <DataGridTextColumn
+                    x:Name="Weight"
+                    Binding="{Binding Path=Weight}"
+                    Header="Weight"
+                    IsReadOnly="True" />
+
+
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

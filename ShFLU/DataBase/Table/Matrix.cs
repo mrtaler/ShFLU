@@ -13,10 +13,11 @@ namespace ShFLU.DataBase.Table
         {
             this.MatrixWagons = new HashSet<MatrixWagon>();
         }
-        public int Id { get; set; }
-        public string MatrixNum { get; set; }
+        public int MatrixxId { get; set; }
+        public int MatrixNum { get; set; }
         public DateTime MatrixDate { get; set; }
         public String MatrixType { get; set; }
+     
         public virtual ICollection<MatrixWagon> MatrixWagons { get; set; }
     }
     public class MatrixxConfiguration : EntityTypeConfiguration<Matrixx>
@@ -24,7 +25,7 @@ namespace ShFLU.DataBase.Table
         public MatrixxConfiguration()
         {
             this.ToTable("Matrix", "dbo");
-            this.HasKey(p => p.Id);//primary key
+            this.HasKey(p => p.MatrixxId);//primary key
 
            // this.Property(b => b.MatrixNum).IsUnique();
 
