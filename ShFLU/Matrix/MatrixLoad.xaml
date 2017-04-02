@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MatrixLoad"
     Width="723.539"
-    Height="331.707"
+    Height="404.61"
     mc:Ignorable="d">
     <Grid>
         <Button
@@ -18,23 +18,10 @@
             VerticalAlignment="Top"
             Command="{Binding LoadMatrixCommand}"
             CommandParameter="Tara"
-            Content="Load Matrix tara" />
-        <Button
-            x:Name="button_Copy"
-            Width="132"
-            Margin="10,35,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Command="{Binding LoadMatrixCommand}"
-            CommandParameter="Brutto"
-            Content="Load Matrix brutto" />
+            Content="Load Matrix" />
         <DataGrid
             Name="UsersDataGrid"
-            Width="559"
-            Height="281"
-            Margin="147,10,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
+            Margin="147,10,10,10"
             AutoGenerateColumns="False">
             <DataGrid.InputBindings>
                 <MouseBinding
@@ -60,20 +47,18 @@
                     x:Name="WagonNumberMatrix"
                     Binding="{Binding Path=WagonNumberMatrix}"
                     Header="WagonNumberMatrix"
-                    IsReadOnly="True" />
+                    IsReadOnly="False" />
                 <DataGridTextColumn
                     x:Name="Speed"
                     Binding="{Binding Path=Speed}"
                     Header="Speed"
-                    IsReadOnly="True" />
+                    IsReadOnly="False" />
 
                 <DataGridTextColumn
                     x:Name="Weight"
                     Binding="{Binding Path=Weight}"
                     Header="Weight"
-                    IsReadOnly="True" />
-
-
+                    IsReadOnly="False" />
             </DataGrid.Columns>
         </DataGrid>
         <CheckBox
@@ -84,5 +69,36 @@
             Command="{Binding ViewAllCommand}"
             CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}, Mode=OneWay}"
             Content="All" />
+        <Button
+            Width="132"
+            Height="27"
+            Margin="10,80,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding SaveContextCommand}"
+            Content="Save" />
+        <Button
+            Width="132"
+            Margin="10,112,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding OpenFromDbCommand}"
+            Content="OpenFromDb" />
+        <TextBox
+            Width="120"
+            Height="23"
+            Margin="10,137,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="{Binding Matrix.MatrixNum}"
+            TextWrapping="Wrap" />
+        <TextBox
+            Width="120"
+            Height="60"
+            Margin="10,165,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Text="{Binding Matrix.MatrixDate}"
+            TextWrapping="Wrap" />
     </Grid>
 </Window>

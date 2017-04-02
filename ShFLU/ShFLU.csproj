@@ -94,6 +94,10 @@
       <DependentUpon>MatrixLoad.xaml</DependentUpon>
     </Compile>
     <Compile Include="Matrix\MatrixLoadViewModel.cs" />
+    <Compile Include="Matrix\OpenFromDB\OpenFromDbView.xaml.cs">
+      <DependentUpon>OpenFromDbView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Matrix\OpenFromDB\OpenFromDbViewModel.cs" />
     <Compile Include="Migrations\201703271942065_First.cs" />
     <Compile Include="Migrations\201703271942065_First.Designer.cs">
       <DependentUpon>201703271942065_First.cs</DependentUpon>
@@ -136,6 +140,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Matrix\MatrixLoad.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Matrix\OpenFromDB\OpenFromDbView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

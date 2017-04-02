@@ -1,33 +1,102 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ShFLU.MVVM;
 
 namespace ShFLU.DataBase.Table
 {
-    public class Matrixx
+    public class Matrixx : ViewModelBase
     {
         public Matrixx()
         {
-            this.MatrixWagons = new HashSet<MatrixWagon>();
+            matrixDate=DateTime.Now;
+            MatrixWagons = new ObservableCollection<MatrixWagon>();
         }
-        public int MatrixxId { get; set; }
-        public int MatrixNum { get; set; }
-        public DateTime MatrixDate { get; set; }
-        public String MatrixType { get; set; }
-     
-        public virtual ICollection<MatrixWagon> MatrixWagons { get; set; }
+
+        private int matrixxId;
+
+        public int MatrixxId
+        {
+            get
+            {
+                return matrixxId;
+            }
+            set
+            {
+                if (matrixxId != value)
+                {
+                    matrixxId = value;
+                    NotifyPropertyChanged("MatrixxId");
+                }
+            }
+        }
+
+        private int matrixNum;
+        public int MatrixNum
+        {
+            get
+            {
+                return matrixNum;
+            }
+            set
+            {
+                if (matrixNum != value)
+                {
+                    matrixNum = value;
+                    NotifyPropertyChanged("MatrixNum");
+                }
+            }
+        }
+
+        private DateTime matrixDate;
+        public DateTime MatrixDate
+        {
+            get
+            {
+                return matrixDate;
+            }
+            set
+            {
+                if (matrixDate != value)
+                {
+                    matrixDate = value;
+                    NotifyPropertyChanged("MatrixDate");
+                }
+            }
+        }
+
+        private string matrixType;
+        public string MatrixType
+        {
+            get
+            {
+                return matrixType;
+            }
+            set
+            {
+                if (matrixType != value)
+                {
+                    matrixType = value;
+                    NotifyPropertyChanged("MatrixType");
+                }
+            }
+        }
+
+        public virtual ObservableCollection<MatrixWagon> MatrixWagons { get; set; }
+
+        public Matrixx Copy()
+        {
+            return (Matrixx)MemberwiseClone();
+        }
     }
     public class MatrixxConfiguration : EntityTypeConfiguration<Matrixx>
     {
         public MatrixxConfiguration()
         {
-            this.ToTable("Matrix", "dbo");
-            this.HasKey(p => p.MatrixxId);//primary key
+            ToTable("Matrix", "dbo");
+            HasKey(p => p.MatrixxId);//primary key
 
-           // this.Property(b => b.MatrixNum).IsUnique();
+            // this.Property(b => b.MatrixNum).IsUnique();
 
         }
     }

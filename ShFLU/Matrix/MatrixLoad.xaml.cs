@@ -37,7 +37,7 @@ namespace ShFLU.Matrix
 
             par1 = values[0] as ICollection<MatrixWagon>;
 
-            if (par1.Count!=0)
+            if (par1 != null && par1.Count!=0)
             {
                
                 bool par2 = (bool)values[1];

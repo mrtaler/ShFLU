@@ -4,34 +4,85 @@ using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ShFLU.MVVM;
 
 namespace ShFLU.DataBase.Table
 {
-    public class MatrixWagon
+    public class MatrixWagon : ViewModelBase
     {
+        private int? wagonNumberMatrix;
+        private string speed;
+        private string weight;
+
+        /// <summary>
+        /// primary id
+        /// </summary>
         public int MatrixWagonId { get; set; }
         /// <summary>
-        /// Tara from SMGS
+        /// number p/p
         /// </summary>
         public int WagonNumberPP { get; set; }
         /// <summary>
         /// Wagon number in matrix
         /// </summary>
-        public int? WagonNumberMatrix { get; set; }
+        public int? WagonNumberMatrix
+        {
+            get
+            {
+                return wagonNumberMatrix;
+            }
+            set
+            {
+                if (wagonNumberMatrix != value)
+                {
+                    wagonNumberMatrix = value;
+                    NotifyPropertyChanged("WagonNumberMatrix");
+                }
+            }
+        }
         /// <summary>
         /// weight Brutto
         /// </summary>
-        public string Speed { get; set; }
+        public string Speed
+        {
+            get
+            {
+                return speed;
+            }
+            set
+            {
+                if (speed != value)
+                {
+                    speed = value;
+                    NotifyPropertyChanged("Speed");
+                }
+            }
+        }
         /// <summary>
         /// Netto
         /// </summary>
-        public string Weight { get; set; }
+        public string Weight
+        {
+            get
+            {
+                return weight;
+            }
+            set
+            {
+                if (weight != value)
+                {
+                    weight = value;
+                    NotifyPropertyChanged("Weight");
+                }
+            }
+        }
 
         /// <summary>
         /// SMGS
         /// </summary>
         public virtual Matrixx Matrixx { get; set; }
         public int MatrixId { get; set; }
+
 
     }
     public class MatrixxWagonConfiguration : EntityTypeConfiguration<MatrixWagon>

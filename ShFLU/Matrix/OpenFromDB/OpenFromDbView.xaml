@@ -1,0 +1,36 @@
+﻿<Window
+    x:Class="ShFLU.Matrix.OpenFromDB.OpenFromDbView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ShFLU.Matrix.OpenFromDB"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="OpenFromDbView"
+    Width="216.758"
+    Height="297.528"
+    mc:Ignorable="d">
+    <Grid>
+        <ListBox
+            Margin="10,10,10,63"
+            DisplayMemberPath="MatrixNum"
+            ItemsSource="{Binding MatrixList}"
+            SelectedItem="{Binding SelectMatrixx}" />
+        <Button
+            Width="75"
+            Height="20"
+            Margin="10,0,0,35"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Click="Button_Click"
+            Content="Select" />
+        <Button
+            Width="75"
+            Height="20"
+            Margin="10,0,0,10"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Click="Button_Click_1"
+            Content="Cancel" />
+
+    </Grid>
+</Window>
