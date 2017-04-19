@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using ShFLU.DataBase.Table;
 
 namespace ShFLU.DataBase
 {
-    public partial class ShFluContext : DbContext
+    public class ShFluContext : DbContext
     {
         public ShFluContext()
           //  : base("name=ContextGurpsModel")
@@ -22,8 +17,8 @@ namespace ShFLU.DataBase
 
         public virtual DbSet<MatrixWagon> MatrixWagonDbSet { get; set; }
         public virtual DbSet<Matrixx> MatrixxDbSet { get; set; }
-      
 
+    //    public virtual DbSet<TaraBruttoFromMatrix> TaraBruttoFromMatrixdDbSet { get; set; }
 
 
 
@@ -36,6 +31,8 @@ namespace ShFLU.DataBase
 
             modelBuilder.Configurations.Add(new MatrixxWagonConfiguration());
             modelBuilder.Configurations.Add(new MatrixxConfiguration());
+
+           // modelBuilder.Configurations.Add(new TaraBruttoFromMatrixConfiguration());
         }
     }
 

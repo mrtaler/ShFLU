@@ -2,4 +2,4 @@
 Add-Migration   -ProjectName "ShFLU"
 Update-Database -ProjectName "ShFLU" -verbose
 
-Update-Database -TargetMigration 201701141825075_4m -ProjectName "GurpsDb"
+Update-Database -TargetMigration 201701141825075_4m -ProjectName "ShFLU"

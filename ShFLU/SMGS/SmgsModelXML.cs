@@ -84,7 +84,7 @@ namespace ShFLU.SMGS
                             insertWag.Tara = vagonItem.Element("tara").Value;
                         }
 
-                        if (smgsNak.Id == 0)
+                        if (smgsNak.SmgsId == 0)
                         {
                             WagInSmgs wgs = new WagInSmgs();
                             wgs.Wagon = context.WagonDbSet.Local.FirstOrDefault(p => p.Nwag == vagnum);
@@ -104,7 +104,7 @@ namespace ShFLU.SMGS
                     }
                 }
             }
-            if (smgsNak.Id == 0)
+            if (smgsNak.SmgsId == 0)
             {
                 context.SmgsNaklDbSet.Add(smgsNak);
             }

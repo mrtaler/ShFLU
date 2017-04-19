@@ -17,7 +17,7 @@ namespace ShFLU.DataBase.Table
         {
             this.WagInSmgses = new HashSet<WagInSmgs>();
         }
-        public int Id { get; set; }
+        public int SmgsId { get; set; }
         /// <summary>
         /// SMGS Number
         /// </summary>
@@ -60,9 +60,7 @@ namespace ShFLU.DataBase.Table
         public SmgsNaklConfiguration()
         {
             this.ToTable("SmgsNakl", "dbo");
-            this.HasKey(p => p.Id);//primary key
-
-            this.Property(b => b.Smgs).IsUnique();
+            this.HasKey(p => p.SmgsId);//primary key
         }
     }
 }

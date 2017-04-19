@@ -4,10 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="allSmgsView"
     Width="605.659"
-    Height="319">
+    Height="410.394">
     <Grid>
         <ListBox
-            Name="listBox1"
+            Name="ListBox1"
             Width="154"
             Margin="12,12,0,31"
             HorizontalAlignment="Left"
@@ -15,11 +15,18 @@
             ItemsSource="{Binding AllSmgsNakl}"
             SelectedItem="{Binding SelectSmgs, UpdateSourceTrigger=PropertyChanged}" />
         <DataGrid
-            Name="dataGrid1"
+            Name="DataGrid1"
             Margin="188,73,12,31"
             AutoGenerateColumns="False"
             CanUserAddRows="False"
             ItemsSource="{Binding AllWagInSmgs, Mode=OneWay}">
+            <DataGrid.InputBindings>
+                <MouseBinding
+                    Command="{Binding EditCommand}"
+                    CommandParameter="{Binding ElementName=DataGrid1, Path=SelectedItem}"
+                    Gesture="LeftDoubleClick" />
+            </DataGrid.InputBindings>
+
             <DataGrid.Columns>
                 <DataGridTextColumn
                     x:Name="Nwag"
@@ -107,5 +114,14 @@
             VerticalAlignment="Top"
             Text="{Binding Path=SelectSmgs.mbrt}"
             TextWrapping="Wrap" />
+        <Button
+            Width="75"
+            Height="20"
+            Margin="12,0,0,5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Command="{Binding DeleteCommand}"
+            CommandParameter="{Binding ElementName=ListBox1, Path=SelectedItem}"
+            Content="del" />
     </Grid>
 </Window>

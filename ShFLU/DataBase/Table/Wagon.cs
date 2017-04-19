@@ -14,9 +14,8 @@ namespace ShFLU.DataBase.Table
         /// </summary>
         public Wagon()
         {
-            this.WagInSmgses = new HashSet<WagInSmgs>();
         }
-        public int Id { get; set; }
+        public int IdWagon { get; set; }
         /// <summary>
         /// Wagon number
         /// </summary>
@@ -45,9 +44,10 @@ namespace ShFLU.DataBase.Table
         public WagonConfiguration()
         {
             this.ToTable("Wagon", "dbo");
-            this.HasKey(p => p.Id);//primary key
-            this.Property(b => b.Nwag).IsUnique();
+            this.HasKey(p => p.IdWagon);//primary key
 
+
+          //  this.HasOptional(s => s.WagInSmgs).WithRequired(p => p.Wagon);
         }
     }
 }
