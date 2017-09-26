@@ -1,0 +1,22 @@
+﻿<Window x:Class="ShFLY.SMGS.SMGS_View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SMGS_View" Height="300" Width="300">
+    <Grid>
+        <Button x:Name="button"
+                Width="93"
+                Margin="10,10,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding LoadSmgsCommand}"
+                Content="LOAD SMGS" />
+        <Button x:Name="Serrial"
+                Width="118"
+                Margin="10,35,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding SerializeSmgsCommand}"
+                Content="SerializeSmgs" />
+        <Label Content="{Binding Count,UpdateSourceTrigger=PropertyChanged}" Height="117" HorizontalAlignment="Left" Margin="38,109,0,0" Name="label1" VerticalAlignment="Top" Width="195" FontSize="40" />
+    </Grid>
+</Window>

@@ -1,0 +1,136 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using ShFLY.DataBase.DAL.Interfaces;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Linq;
+using ShFLY.DataBase.Models;
+using ShFLY.DataBase.DAL.Implemtaations;
+using TicketSaleCore.Models;
+using ShFLY.SMGS.Specifications;
+
+namespace ShFLY.SMGS
+{
+    class SmgsSeriallXML
+    {
+        private IRepository<SmgsNakl> SmgsNaklRepository;
+        private IRepository<Wagon> WagonRepository;
+        private IUnitOfWork unitOfWork;
+        public SmgsSeriallXML(string filePatch, IUnitOfWork context)
+        {
+            unitOfWork = context;
+            SmgsNaklRepository = unitOfWork.SmgsNaklRepository;
+            WagonRepository = unitOfWork.WagonRepository;
+
+            string[] stringFromFile = File.ReadAllLines(filePatch);
+            StringBuilder strResult = new StringBuilder();
+            foreach (var itemStringFromFile in stringFromFile)
+            {
+                strResult.Append(itemStringFromFile);
+                strResult.Append('\n');
+            }
+            string commentPattern3 = @"\<\?xml(\w|\W)*</doc>";
+            var reg = Regex.Match(strResult.ToString(), commentPattern3).ToString();
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(reg);
+
+            XDocument xdoc = XDocument.Parse(doc.OuterXml);
+            var atr = xdoc.Root.Attribute("name");
+            if (atr.Value.ToLower() == "nakl")
+            {
+                SmgsNakl smgsNak = null;
+
+                foreach (XElement smgsXElement in xdoc.Root.Elements("table"))
+                {
+                    if (smgsXElement.FirstAttribute.Value == "nakl")
+                    {
+                        //smgsNak.Smgs = Convert.ToInt32(smgsXElement.Element("data").Element("smgs").Value);
+                        var smgs = Convert.ToInt32(smgsXElement.Element("data").Element("smgs").Value);
+                        var smgsNumSpec = new FindSmgsBySmgsNum(smgs);
+
+
+                        smgsNak = SmgsNaklRepository.GetOne(smgsNumSpec);
+                        if (smgsNak == null)
+                        {
+                            smgsNak = new SmgsNakl();
+                            smgsNak.Smgs = Convert.ToInt32(smgsXElement.Element("data").Element("smgs").Value);
+                            smgsNak.Smgsdat = Convert.ToDateTime(smgsXElement.Element("data").Element("smgsdat").Value);
+                            smgsNak.mnet = smgsXElement.Element("data").Element("mnet").Value;
+                            smgsNak.mbrt = smgsXElement.Element("data").Element("mbrt").Value;
+                        }
+
+                    }
+                    if (smgsXElement.FirstAttribute.Value == "nakl_gruz")
+                    {
+                        smgsNak.Etsngn = smgsXElement.Element("data").Element("etsngn").Value;
+                        smgsNak.gngc = smgsXElement.Element("data").Element("gngc").Value;
+                        smgsNak.gngn = smgsXElement.Element("data").Element("gngn").Value;
+                        smgsNak.etsngc = smgsXElement.Element("data").Element("etsngc").Value;
+                    }
+                    if (smgsXElement.FirstAttribute.Value == "nakl_vag")
+                    {
+                        foreach (var vagonItem in smgsXElement.Elements("data"))
+                        {
+                            int vagnum = Convert.ToInt32(vagonItem.Element("nwag").Value);
+
+                            var vagnumSpec = new FindWagonByWagonNum(vagnum);
+                            var insertWag = WagonRepository.GetOne(vagnumSpec);
+
+                            if (insertWag == null)
+                            {
+                                Wagon wag = new Wagon
+                                {
+                                    Nwag = Convert.ToInt32(vagonItem.Element("nwag").Value),
+                                    Ownerc = vagonItem.Element("ownerc").Value,
+                                    Gp = vagonItem.Element("gp").Value,
+                                    Tara = vagonItem.Element("tara").Value
+                                };
+
+                                WagonRepository.Create(wag);
+
+                            }
+                            else
+                            {
+                                insertWag.Nwag = Convert.ToInt32(vagonItem.Element("nwag").Value);
+                                insertWag.Ownerc = vagonItem.Element("ownerc").Value;
+                                insertWag.Gp = vagonItem.Element("gp").Value;
+                                insertWag.Tara = vagonItem.Element("tara").Value;
+                            }
+
+                            if (smgsNak.SmgsId == 0)
+                            {
+                                WagInSmgs wgs = new WagInSmgs();
+                                wgs.Wagon = WagonRepository.GetLocal().FirstOrDefault(p => p.Nwag == vagnum);
+                                wgs.Tarapr = vagonItem.Element("tarapr").Value;
+                                wgs.Weightb = vagonItem.Element("weightb").Value;
+                                wgs.Weight = vagonItem.Element("weight").Value;
+                                smgsNak.WagInSmgses.Add(wgs);
+                            }
+                            else
+                            {
+                                WagInSmgs wgs = smgsNak.WagInSmgses.First(p => p.Wagon.Nwag == vagnum);
+                                wgs.Wagon = WagonRepository.GetLocal().FirstOrDefault(p => p.Nwag == vagnum);
+                                wgs.Tarapr = vagonItem.Element("tarapr").Value;
+                                wgs.Weightb = vagonItem.Element("weightb").Value;
+                                wgs.Weight = vagonItem.Element("weight").Value;
+                            }
+                        }
+                    }
+                }
+                if (smgsNak.SmgsId == 0)
+                {
+                    SmgsNaklRepository.Create(smgsNak);
+                }
+
+                unitOfWork.SaveChanges();
+            }
+            else
+            {
+                var t = atr.Value;
+            }
+        }
+    }
+}

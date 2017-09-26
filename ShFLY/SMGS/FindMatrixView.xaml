@@ -1,0 +1,31 @@
+﻿<Window x:Class="ShFLY.SMGS.FindMatrixView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="FindMatrixView" Height="300" Width="300">
+    <Grid>
+        <DataGrid
+            Name="DataGrid1"
+            Width="441"
+            Height="217"
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ItemsSource="{Binding MatrixWagonList}" />
+        <Button
+            Width="75"
+            Margin="10,232,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding AddCommand}"
+            CommandParameter="{Binding ElementName=DataGrid1, Path=SelectedItem}"
+            Content="add" />
+        <Button
+            Width="75"
+            Margin="100,232,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Command="{Binding SaveCommand}"
+            Content="Button" />
+
+    </Grid>
+</Window>

@@ -1,0 +1,5 @@
+﻿Enable-Migrations -ProjectName "ShFLY" -StartUpProjectName "ShFLY" 
+Add-Migration   -ProjectName "ShFLY"
+Update-Database -ProjectName "ShFLY" -verbose
+
+Update-Database -TargetMigration 201701141825075_4m -ProjectName "ShFLY"
