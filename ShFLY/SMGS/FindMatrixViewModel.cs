@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+
+using ShFLY.Base;
 using ShFLY.DataBase.DAL.Interfaces;
 using ShFLY.DataBase.Models;
-using ShFLY.Base;
 
 namespace ShFLY.SMGS
 {
@@ -18,11 +16,11 @@ namespace ShFLY.SMGS
         public FindMatrixViewModel(WagInSmgs wagInSmgs, IUnitOfWork context)
         {
             this.context = context;
-            WagInSmgs = wagInSmgs;
-            AddCommand = new ViewModelCommand(Add, true);
-            SaveCommand = new ViewModelCommand(Save, true);
+            this.WagInSmgs = wagInSmgs;
+            this.AddCommand = new ViewModelCommand(this.Add, true);
+            this.SaveCommand = new ViewModelCommand(this.Save, true);
 
-            MatrixWagonList = new List<MatrixWagon>(context.MatrixWagonRepository.Get(p => p.WagonNumberMatrix == wagInSmgs.Wagon.Nwag));
+            this.MatrixWagonList = new List<MatrixWagon>(context.MatrixWagonRepository.Get(p => p.WagonNumberMatrix == wagInSmgs.Wagon.Nwag));
         }
 
         private void Add(object param)
@@ -30,16 +28,17 @@ namespace ShFLY.SMGS
             MatrixWagon qq = (MatrixWagon)param;
             if (qq.Matrixx.MatrixType.Contains("Tara"))
             {
-                WagInSmgs.MatrixWagonTara = qq;
+                this.WagInSmgs.MatrixWagonTara = qq;
             }
             else if (qq.Matrixx.MatrixType.Contains("Brutt"))
             {
-                WagInSmgs.MatrixWagonBrutto = qq;
+                this.WagInSmgs.MatrixWagonBrutto = qq;
             }
         }
+
         private void Save()
         {
-            context.SaveChanges();
+            this.context.SaveChanges();
         }
     }
 }

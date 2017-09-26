@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
-using ShFLY.DataBase.DAL.Interfaces;
-using ShFLY.DataBase.DAL.Specifications;
+
 using ShFLY.DataBase.DAL.Specifications.Interfaces;
 
 namespace TicketSaleCore.Models

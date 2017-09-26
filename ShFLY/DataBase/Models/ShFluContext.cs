@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TicketSaleCore.Models;
+﻿using System.Data.Entity;
+
 using ShFLY.DataBase.Models;
 
 namespace ShFLU.DataBase
@@ -12,11 +7,13 @@ namespace ShFLU.DataBase
     public class ShFluContext : DbContext
     {
         public ShFluContext()
-            //  : base("name=ContextGurpsModel")
+
+            // : base("name=ContextGurpsModel")
             : base("offlineWagonDb")
         {
-          //  this.Configuration.LazyLoadingEnabled = false; 
+            // this.Configuration.LazyLoadingEnabled = false; 
         }
+
         public virtual DbSet<SmgsNakl> SmgsNaklDbSet { get; set; }
         public virtual DbSet<WagInSmgs> WagInSmgsDbSet { get; set; }
         public virtual DbSet<Wagon> WagonDbSet { get; set; }
@@ -24,10 +21,7 @@ namespace ShFLU.DataBase
         public virtual DbSet<MatrixWagon> MatrixWagonDbSet { get; set; }
         public virtual DbSet<Matrixx> MatrixxDbSet { get; set; }
 
-        //    public virtual DbSet<TaraBruttoFromMatrix> TaraBruttoFromMatrixdDbSet { get; set; }
-
-
-
+        // public virtual DbSet<TaraBruttoFromMatrix> TaraBruttoFromMatrixdDbSet { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 

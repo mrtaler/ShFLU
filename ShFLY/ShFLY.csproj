@@ -125,6 +125,7 @@
     <Compile Include="SMGS\Specifications\FindSmgsBySmgsNum.cs" />
     <Compile Include="SMGS\Specifications\FindWagonByWagonNum.cs" />
     <Compile Include="SMGS\Specifications\Include.cs" />
+    <Compile Include="SMGS\weigher.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

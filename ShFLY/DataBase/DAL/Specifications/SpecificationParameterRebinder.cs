@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace ShFLY.DataBase.DAL.Specifications
 {
@@ -22,7 +18,7 @@ namespace ShFLY.DataBase.DAL.Specifications
 
         protected override Expression VisitParameter(ParameterExpression p)
         {
-            return base.VisitParameter(specificationParameter);
+            return base.VisitParameter(this.specificationParameter);
         }
     }
 }

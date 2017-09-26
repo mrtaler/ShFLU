@@ -1,27 +1,26 @@
 namespace ShFLY.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class init : DbMigration
     {
         public override void Up()
         {
-            DropForeignKey("dbo.Venues", "CityId", "dbo.Cities");
-            DropForeignKey("dbo.Tickets", "EventId", "dbo.Events");
-            DropForeignKey("dbo.Orders", "BuyerId", "dbo.Users");
-            DropForeignKey("dbo.Orders", "Status_Id", "dbo.Status");
-            DropForeignKey("dbo.Orders", "Id", "dbo.Tickets");
-            DropForeignKey("dbo.Tickets", "SellerId", "dbo.Users");
-            DropForeignKey("dbo.Events", "VenueId", "dbo.Venues");
-            DropIndex("dbo.Venues", new[] { "CityId" });
-            DropIndex("dbo.Events", new[] { "VenueId" });
-            DropIndex("dbo.Tickets", new[] { "SellerId" });
-            DropIndex("dbo.Tickets", new[] { "EventId" });
-            DropIndex("dbo.Orders", new[] { "Id" });
-            DropIndex("dbo.Orders", new[] { "BuyerId" });
-            DropIndex("dbo.Orders", new[] { "Status_Id" });
-            CreateTable(
+            this.DropForeignKey("dbo.Venues", "CityId", "dbo.Cities");
+            this.DropForeignKey("dbo.Tickets", "EventId", "dbo.Events");
+            this.DropForeignKey("dbo.Orders", "BuyerId", "dbo.Users");
+            this.DropForeignKey("dbo.Orders", "Status_Id", "dbo.Status");
+            this.DropForeignKey("dbo.Orders", "Id", "dbo.Tickets");
+            this.DropForeignKey("dbo.Tickets", "SellerId", "dbo.Users");
+            this.DropForeignKey("dbo.Events", "VenueId", "dbo.Venues");
+            this.DropIndex("dbo.Venues", new[] { "CityId" });
+            this.DropIndex("dbo.Events", new[] { "VenueId" });
+            this.DropIndex("dbo.Tickets", new[] { "SellerId" });
+            this.DropIndex("dbo.Tickets", new[] { "EventId" });
+            this.DropIndex("dbo.Orders", new[] { "Id" });
+            this.DropIndex("dbo.Orders", new[] { "BuyerId" });
+            this.DropIndex("dbo.Orders", new[] { "Status_Id" });
+            this.CreateTable(
                 "dbo.MatrixWagon",
                 c => new
                     {
@@ -35,8 +34,8 @@ namespace ShFLY.Migrations
                 .PrimaryKey(t => t.MatrixWagonId)
                 .ForeignKey("dbo.Matrix", t => t.MatrixId, cascadeDelete: true)
                 .Index(t => t.MatrixId);
-            
-            CreateTable(
+
+            this.CreateTable(
                 "dbo.Matrix",
                 c => new
                     {
@@ -46,8 +45,8 @@ namespace ShFLY.Migrations
                         MatrixType = c.String(),
                     })
                 .PrimaryKey(t => t.MatrixxId);
-            
-            CreateTable(
+
+            this.CreateTable(
                 "dbo.WagInSmgs",
                 c => new
                     {
@@ -69,8 +68,8 @@ namespace ShFLY.Migrations
                 .Index(t => t.SmgsNaklId)
                 .Index(t => t.MatrixWagonBrutto_MatrixWagonId)
                 .Index(t => t.MatrixWagonTara_MatrixWagonId);
-            
-            CreateTable(
+
+            this.CreateTable(
                 "dbo.SmgsNakl",
                 c => new
                     {
@@ -85,8 +84,8 @@ namespace ShFLY.Migrations
                         mbrt = c.String(),
                     })
                 .PrimaryKey(t => t.SmgsId);
-            
-            CreateTable(
+
+            this.CreateTable(
                 "dbo.Wagon",
                 c => new
                     {
@@ -97,19 +96,19 @@ namespace ShFLY.Migrations
                         Tara = c.String(),
                     })
                 .PrimaryKey(t => t.IdWagon);
-            
-            DropTable("dbo.Cities");
-            DropTable("dbo.Venues");
-            DropTable("dbo.Events");
-            DropTable("dbo.Tickets");
-            DropTable("dbo.Orders");
-            DropTable("dbo.Users");
-            DropTable("dbo.Status");
+
+            this.DropTable("dbo.Cities");
+            this.DropTable("dbo.Venues");
+            this.DropTable("dbo.Events");
+            this.DropTable("dbo.Tickets");
+            this.DropTable("dbo.Orders");
+            this.DropTable("dbo.Users");
+            this.DropTable("dbo.Status");
         }
         
         public override void Down()
         {
-            CreateTable(
+            this.CreateTable(
                 "dbo.Status",
                 c => new
                     {
@@ -117,8 +116,8 @@ namespace ShFLY.Migrations
                         StatusName = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
-            
-            CreateTable(
+
+            this.CreateTable(
                 "dbo.Users",
                 c => new
                     {
@@ -130,8 +129,8 @@ namespace ShFLY.Migrations
                         PhoneNumber = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
-            
-            CreateTable(
+
+            this.CreateTable(
                 "dbo.Orders",
                 c => new
                     {
@@ -141,8 +140,8 @@ namespace ShFLY.Migrations
                         Status_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
-            CreateTable(
+
+            this.CreateTable(
                 "dbo.Tickets",
                 c => new
                     {
@@ -152,8 +151,8 @@ namespace ShFLY.Migrations
                         EventId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
-            CreateTable(
+
+            this.CreateTable(
                 "dbo.Events",
                 c => new
                     {
@@ -165,8 +164,8 @@ namespace ShFLY.Migrations
                         VenueId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
-            CreateTable(
+
+            this.CreateTable(
                 "dbo.Venues",
                 c => new
                     {
@@ -176,8 +175,8 @@ namespace ShFLY.Migrations
                         CityId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
-            CreateTable(
+
+            this.CreateTable(
                 "dbo.Cities",
                 c => new
                     {
@@ -185,36 +184,36 @@ namespace ShFLY.Migrations
                         Name = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
-            
-            DropForeignKey("dbo.WagInSmgs", "MatrixWagonTara_MatrixWagonId", "dbo.MatrixWagon");
-            DropForeignKey("dbo.WagInSmgs", "WgaonId", "dbo.Wagon");
-            DropForeignKey("dbo.WagInSmgs", "SmgsNaklId", "dbo.SmgsNakl");
-            DropForeignKey("dbo.WagInSmgs", "MatrixWagonBrutto_MatrixWagonId", "dbo.MatrixWagon");
-            DropForeignKey("dbo.MatrixWagon", "MatrixId", "dbo.Matrix");
-            DropIndex("dbo.WagInSmgs", new[] { "MatrixWagonTara_MatrixWagonId" });
-            DropIndex("dbo.WagInSmgs", new[] { "MatrixWagonBrutto_MatrixWagonId" });
-            DropIndex("dbo.WagInSmgs", new[] { "SmgsNaklId" });
-            DropIndex("dbo.WagInSmgs", new[] { "WgaonId" });
-            DropIndex("dbo.MatrixWagon", new[] { "MatrixId" });
-            DropTable("dbo.Wagon");
-            DropTable("dbo.SmgsNakl");
-            DropTable("dbo.WagInSmgs");
-            DropTable("dbo.Matrix");
-            DropTable("dbo.MatrixWagon");
-            CreateIndex("dbo.Orders", "Status_Id");
-            CreateIndex("dbo.Orders", "BuyerId");
-            CreateIndex("dbo.Orders", "Id");
-            CreateIndex("dbo.Tickets", "EventId");
-            CreateIndex("dbo.Tickets", "SellerId");
-            CreateIndex("dbo.Events", "VenueId");
-            CreateIndex("dbo.Venues", "CityId");
-            AddForeignKey("dbo.Events", "VenueId", "dbo.Venues", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.Tickets", "SellerId", "dbo.Users", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.Orders", "Id", "dbo.Tickets", "Id");
-            AddForeignKey("dbo.Orders", "Status_Id", "dbo.Status", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.Orders", "BuyerId", "dbo.Users", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.Tickets", "EventId", "dbo.Events", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.Venues", "CityId", "dbo.Cities", "Id", cascadeDelete: true);
+
+            this.DropForeignKey("dbo.WagInSmgs", "MatrixWagonTara_MatrixWagonId", "dbo.MatrixWagon");
+            this.DropForeignKey("dbo.WagInSmgs", "WgaonId", "dbo.Wagon");
+            this.DropForeignKey("dbo.WagInSmgs", "SmgsNaklId", "dbo.SmgsNakl");
+            this.DropForeignKey("dbo.WagInSmgs", "MatrixWagonBrutto_MatrixWagonId", "dbo.MatrixWagon");
+            this.DropForeignKey("dbo.MatrixWagon", "MatrixId", "dbo.Matrix");
+            this.DropIndex("dbo.WagInSmgs", new[] { "MatrixWagonTara_MatrixWagonId" });
+            this.DropIndex("dbo.WagInSmgs", new[] { "MatrixWagonBrutto_MatrixWagonId" });
+            this.DropIndex("dbo.WagInSmgs", new[] { "SmgsNaklId" });
+            this.DropIndex("dbo.WagInSmgs", new[] { "WgaonId" });
+            this.DropIndex("dbo.MatrixWagon", new[] { "MatrixId" });
+            this.DropTable("dbo.Wagon");
+            this.DropTable("dbo.SmgsNakl");
+            this.DropTable("dbo.WagInSmgs");
+            this.DropTable("dbo.Matrix");
+            this.DropTable("dbo.MatrixWagon");
+            this.CreateIndex("dbo.Orders", "Status_Id");
+            this.CreateIndex("dbo.Orders", "BuyerId");
+            this.CreateIndex("dbo.Orders", "Id");
+            this.CreateIndex("dbo.Tickets", "EventId");
+            this.CreateIndex("dbo.Tickets", "SellerId");
+            this.CreateIndex("dbo.Events", "VenueId");
+            this.CreateIndex("dbo.Venues", "CityId");
+            this.AddForeignKey("dbo.Events", "VenueId", "dbo.Venues", "Id", cascadeDelete: true);
+            this.AddForeignKey("dbo.Tickets", "SellerId", "dbo.Users", "Id", cascadeDelete: true);
+            this.AddForeignKey("dbo.Orders", "Id", "dbo.Tickets", "Id");
+            this.AddForeignKey("dbo.Orders", "Status_Id", "dbo.Status", "Id", cascadeDelete: true);
+            this.AddForeignKey("dbo.Orders", "BuyerId", "dbo.Users", "Id", cascadeDelete: true);
+            this.AddForeignKey("dbo.Tickets", "EventId", "dbo.Events", "Id", cascadeDelete: true);
+            this.AddForeignKey("dbo.Venues", "CityId", "dbo.Cities", "Id", cascadeDelete: true);
         }
     }
 }

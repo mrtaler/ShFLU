@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TicketSaleCore.Models;
 using System.Data.Entity;
+using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using ShFLY.DataBase.DAL.Specifications;
+
 using ShFLY.DataBase.DAL.Specifications.Interfaces;
+
+using TicketSaleCore.Models;
 
 namespace ShFLY.DataBase.DAL.Implemtaations
 {
@@ -22,11 +21,12 @@ namespace ShFLY.DataBase.DAL.Implemtaations
         {
             get
             {
-                if (entities == null)
+                if (this.entities == null)
                 {
-                    entities = context.Set<TEntity>();
+                    this.entities = this.context.Set<TEntity>();
                 }
-                return entities;
+
+                return this.entities;
             }
         }
 
@@ -51,7 +51,7 @@ namespace ShFLY.DataBase.DAL.Implemtaations
             int? skip = null,
             int? take = null)
         {
-            IQueryable<TEntity> query = Table;
+            IQueryable<TEntity> query = this.Table;
 
             if (filter != null)
                 query = query.Where(filter);
@@ -66,26 +66,30 @@ namespace ShFLY.DataBase.DAL.Implemtaations
 
         public void Create(TEntity entity, string createdBy = null)
         {
-            DbSet.Add(entity);
+            this.DbSet.Add(entity);
         }
+
         public void Update(TEntity entity, string modifiedBy = null)
         {
-            DbSet.Attach(entity);
-            context.Entry(entity).State = EntityState.Modified;
+            this.DbSet.Attach(entity);
+            this.context.Entry(entity).State = EntityState.Modified;
         }
+
         public void Delete(object id, string deleteBy = null)
         {
-            TEntity entity = DbSet.Find(id);
-            Delete(entity);
+            TEntity entity = this.DbSet.Find(id);
+            this.Delete(entity);
         }
+
         public void Delete(TEntity entity, string deleteBy = null)
         {
 
-            if (context.Entry(entity).State == EntityState.Detached)
+            if (this.context.Entry(entity).State == EntityState.Detached)
             {
-                DbSet.Attach(entity);
+                this.DbSet.Attach(entity);
             }
-            DbSet.Remove(entity);
+
+            this.DbSet.Remove(entity);
         }
 
         #region
@@ -94,36 +98,41 @@ namespace ShFLY.DataBase.DAL.Implemtaations
              int? skip = null,
              int? take = null)
         {
-            return GetQueryable(null, orderBy, skip, take).ToList();
+            return this.GetQueryable(null, orderBy, skip, take).ToList();
         }
+
         public virtual IEnumerable<TEntity> Get(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             int? skip = null, int? take = null)
         {
-            var ret = GetQueryable(filter, orderBy, skip, take).ToList();
+            var ret = this.GetQueryable(filter, orderBy, skip, take).ToList();
             return ret;
         }
+
         public virtual TEntity GetById(object id)
         {
-            var ret = DbSet.Find(id);
+            var ret = this.DbSet.Find(id);
             return ret;
         }
+
         public virtual int GetCount(Expression<Func<TEntity, bool>> filter = null)
         {
-            var ret = GetQueryable(filter).Count();
+            var ret = this.GetQueryable(filter).Count();
             return ret;
         }
+
         public virtual bool GetExist(Expression<Func<TEntity, bool>> filter = null)
         {
-            var ret = GetQueryable(filter).Any();
+            var ret = this.GetQueryable(filter).Any();
             return ret;
         }
+
         public virtual TEntity GetFirst(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
         {
-            var ret = GetQueryable(filter, orderBy).FirstOrDefault();
+            var ret = this.GetQueryable(filter, orderBy).FirstOrDefault();
             return ret;
         }
        
@@ -131,12 +140,13 @@ namespace ShFLY.DataBase.DAL.Implemtaations
         
         public virtual TEntity GetOne(ISpecification<TEntity> specification = null)
         {
-            var query = DbSet.Where(specification.IsSatisifiedBy());
+            var query = this.DbSet.Where(specification.IsSatisifiedBy());
             return query.SingleOrDefault();
         }
+
         public IEnumerable<TEntity> GetLocal()
         {
-            return DbSet.Local;
+            return this.DbSet.Local;
         }
     }
 }

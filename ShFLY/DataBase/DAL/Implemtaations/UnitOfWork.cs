@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ShFLY.DataBase.DAL.Interfaces;
-using System.Data;
-using TicketSaleCore.Models;
-using ShFLY.DataBase.Models;
+
 using ShFLU.DataBase;
+
+using ShFLY.DataBase.DAL.Interfaces;
+using ShFLY.DataBase.Models;
+
+using TicketSaleCore.Models;
 
 namespace ShFLY.DataBase.DAL.Implemtaations
 {
     class UnitOfWork : IUnitOfWork
-
-
     {
         private readonly ShFluContext context;
         private bool disposed;
@@ -23,27 +21,29 @@ namespace ShFLY.DataBase.DAL.Implemtaations
         {
             this.context = context;
         }
+
         public UnitOfWork()
         {
-            context = new ShFluContext();
+            this.context = new ShFluContext();
         }
 
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         public virtual void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (!this.disposed)
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    this.context.Dispose();
                 }
             }
-            disposed = true;
+
+            this.disposed = true;
         }
 
      
@@ -55,23 +55,23 @@ namespace ShFLY.DataBase.DAL.Implemtaations
         
         public IRepository<MatrixWagon> MatrixWagonRepository
         {
-            get { return new GenericRepository<MatrixWagon>(context); }
+            get { return new GenericRepository<MatrixWagon>(this.context); }
         }
         public  IRepository<Matrixx> MatrixxRepository
         {
-            get { return new GenericRepository<Matrixx>(context); }
+            get { return new GenericRepository<Matrixx>(this.context); }
         }
-        public  IRepository< SmgsNakl> SmgsNaklRepository
+        public  IRepository<SmgsNakl> SmgsNaklRepository
         {
-            get { return new GenericRepository<SmgsNakl>(context); }
+            get { return new GenericRepository<SmgsNakl>(this.context); }
         }
         public IRepository<WagInSmgs> WagInSmgsRepository
         {
-            get { return new GenericRepository<WagInSmgs>(context); }
+            get { return new GenericRepository<WagInSmgs>(this.context); }
         }
         public IRepository<Wagon> WagonRepository
         {
-            get { return new GenericRepository<Wagon>(context); }
+            get { return new GenericRepository<Wagon>(this.context); }
         }
 
     }

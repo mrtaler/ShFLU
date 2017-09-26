@@ -10,7 +10,8 @@
 
 namespace ShFLY.Properties
 {
-
+    using System.Globalization;
+    using System.Resources;
 
     /// <summary>
     ///   Класс ресурсов со строгим типом для поиска локализованных строк и пр.
@@ -25,9 +26,9 @@ namespace ShFLY.Properties
     internal class Resources
     {
 
-        private static global::System.Resources.ResourceManager resourceMan;
+        private static ResourceManager resourceMan;
 
-        private static global::System.Globalization.CultureInfo resourceCulture;
+        private static CultureInfo resourceCulture;
 
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources()
@@ -38,15 +39,16 @@ namespace ShFLY.Properties
         ///   Возврат кэшированного экземпляра ResourceManager, используемого этим классом.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
+        internal static ResourceManager ResourceManager
         {
             get
             {
-                if ((resourceMan == null))
+                if (resourceMan == null)
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ShFLY.Properties.Resources", typeof(Resources).Assembly);
+                    ResourceManager temp = new global::System.Resources.ResourceManager("ShFLY.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
+
                 return resourceMan;
             }
         }
@@ -56,12 +58,13 @@ namespace ShFLY.Properties
         ///   подстановки ресурсов с помощью этого класса ресурсов со строгим типом.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
+        internal static CultureInfo Culture
         {
             get
             {
                 return resourceCulture;
             }
+
             set
             {
                 resourceCulture = value;

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
-using TicketSaleCore.Models;
+
 using ShFLY.DataBase.Models;
-using ShFLY.DataBase.DAL.Implemtaations;
+
+using TicketSaleCore.Models;
 
 namespace ShFLY.DataBase.DAL.Interfaces
 {

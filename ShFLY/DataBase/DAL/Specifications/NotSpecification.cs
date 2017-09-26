@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ShFLY.DataBase.DAL.Specifications.Interfaces;
 using System.Linq.Expressions;
+
+using ShFLY.DataBase.DAL.Specifications.Interfaces;
 
 namespace ShFLY.DataBase.DAL.Specifications
 {
@@ -18,7 +16,7 @@ namespace ShFLY.DataBase.DAL.Specifications
 
         public Expression<Func<T, bool>> IsSatisifiedBy()
         {
-            var expression = specification.IsSatisifiedBy();
+            var expression = this.specification.IsSatisifiedBy();
 
             var parameter = expression.Parameters[0];
             var body = Expression.Not(expression.Body);

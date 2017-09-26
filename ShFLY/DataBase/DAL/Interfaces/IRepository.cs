@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-
-namespace TicketSaleCore.Models
+﻿namespace TicketSaleCore.Models
 {
     public interface IRepository<TEntity> : IReadableRepository<TEntity>
         where TEntity : class

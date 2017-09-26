@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
+
 using ShFLY.DataBase.DAL.Specifications.Interfaces;
 
 namespace ShFLY.DataBase.DAL.Specifications

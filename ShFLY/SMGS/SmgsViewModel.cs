@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Windows;
+
+using Microsoft.Win32;
+
 using ShFLY.Base;
 using ShFLY.DataBase.DAL.Implemtaations;
 using ShFLY.DataBase.DAL.Interfaces;
-using Microsoft.Win32;
-using System.Windows;
 
 namespace ShFLY.SMGS
 {
@@ -19,14 +17,15 @@ namespace ShFLY.SMGS
         {
             get
             {
-                return _count;
+                return this._count;
             }
+
             set
             {
-                if (_count != value)
+                if (this._count != value)
                 {
-                    _count = value;
-                    NotifyPropertyChanged("Count");
+                    this._count = value;
+                    this.NotifyPropertyChanged("Count");
                 }
             }
         }
@@ -36,8 +35,8 @@ namespace ShFLY.SMGS
 
         public SmgsViewModel()
         {
-            LoadSmgsCommand = new ViewModelCommand(LoadSmgs, true);
-            SerializeSmgsCommand = new ViewModelCommand(SerializeSmgs, false);
+            this.LoadSmgsCommand = new ViewModelCommand(this.LoadSmgs, true);
+            this.SerializeSmgsCommand = new ViewModelCommand(this.SerializeSmgs, false);
         }
 
 
@@ -46,28 +45,28 @@ namespace ShFLY.SMGS
             string str = "pkc7";
             string filter = "GCS Skill files (*." + str + ")| *." + str + "| All Files(*.*) | *.* ";
             OpenFileDialog dlg = new OpenFileDialog();
+
             // dlg.InitialDirectory = @"D:\ДокументыЛинкевич\ПРИХОД ШФУ\ЕТК\02";
             dlg.InitialDirectory = @"C:\Users\Derdan\Dropbox\Work\Matrix";
 
             dlg.Filter = filter;
             dlg.Multiselect = true;
             dlg.ShowDialog();
-            if (dlg.FileName != "")
+            if (dlg.FileName != string.Empty)
             {
-                XMLSmgsWagonPatch = dlg.FileNames;
-                NotifyPropertyChanged("XMLSmgsWagonPatch");
-                SerializeSmgsCommand.CanExecute = true;
+                this.XMLSmgsWagonPatch = dlg.FileNames;
+                this.NotifyPropertyChanged("XMLSmgsWagonPatch");
+                this.SerializeSmgsCommand.CanExecute = true;
             }
         }
 
-
         private void SerializeSmgs(object param)
         {
-            Count = 0;
-            foreach (var item in XMLSmgsWagonPatch)
+            this.Count = 0;
+            foreach (var item in this.XMLSmgsWagonPatch)
             {
-                SmgsSeriallXML neSeriallXml = new SmgsSeriallXML(item, context);
-               Count+=1;
+                SmgsSeriallXML neSeriallXml = new SmgsSeriallXML(item, this.context);
+                this.Count+=1;
             }
             
             MessageBox.Show("done");

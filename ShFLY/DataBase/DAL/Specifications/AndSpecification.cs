@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using ShFLY.DataBase.DAL.Specifications.Interfaces;
 using System.Linq.Expressions;
+
+using ShFLY.DataBase.DAL.Specifications.Interfaces;
 
 namespace ShFLY.DataBase.DAL.Specifications
 {
@@ -20,8 +19,8 @@ namespace ShFLY.DataBase.DAL.Specifications
 
         public Expression<Func<T, bool>> IsSatisifiedBy()
         {
-            var leftExpression = left.IsSatisifiedBy();
-            var rightExpression = right.IsSatisifiedBy();
+            var leftExpression = this.left.IsSatisifiedBy();
+            var rightExpression = this.right.IsSatisifiedBy();
 
             var parameter = leftExpression.Parameters.Single();
             var body = Expression.AndAlso(leftExpression.Body, SpecificationParameterRebinder.ReplaceParameter(rightExpression.Body, parameter));

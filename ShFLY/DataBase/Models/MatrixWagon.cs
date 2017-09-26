@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace ShFLY.DataBase.Models
 {
@@ -12,18 +8,22 @@ namespace ShFLY.DataBase.Models
         /// primary id
         /// </summary>
         public int MatrixWagonId { get; set; }
+
         /// <summary>
         /// number p/p
         /// </summary>
         public int WagonNumberPP { get; set; }
+
         /// <summary>
         /// Wagon number in matrix
         /// </summary>
         public int? WagonNumberMatrix { get; set; }
+
         /// <summary>
         /// weight Brutto
         /// </summary>
         public string Speed { get; set; }
+
         /// <summary>
         /// Netto
         /// </summary>
@@ -42,17 +42,16 @@ namespace ShFLY.DataBase.Models
     {
         public MatrixxWagonConfiguration()
         {
-            ToTable("MatrixWagon", "dbo");
-            HasKey(q => q.MatrixWagonId);
+            this.ToTable("MatrixWagon", "dbo");
+            this.HasKey(q => q.MatrixWagonId);
 
-            HasRequired(t => t.Matrixx)
+            this.HasRequired(t => t.Matrixx)
                .WithMany(t => t.MatrixWagons)
                .HasForeignKey(t => t.MatrixId);
 
+            this.HasOptional(p => p.WagInSmgs).WithOptionalPrincipal(z => z.MatrixWagonBrutto);
 
-            HasOptional(p => p.WagInSmgs).WithOptionalPrincipal(z => z.MatrixWagonBrutto);
-
-            HasOptional(p => p.WagInSmgs).WithOptionalPrincipal(z => z.MatrixWagonTara);
+            this.HasOptional(p => p.WagInSmgs).WithOptionalPrincipal(z => z.MatrixWagonTara);
 
 
         }

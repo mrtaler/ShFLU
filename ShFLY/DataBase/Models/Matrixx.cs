@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data.Entity.ModelConfiguration;
 
 namespace ShFLY.DataBase.Models
@@ -10,11 +8,11 @@ namespace ShFLY.DataBase.Models
     {
         public Matrixx()
         {
-            MatrixDate = DateTime.Now;
-            MatrixWagons = new HashSet<MatrixWagon>();
+            this.MatrixDate = DateTime.Now;
+            this.MatrixWagons = new HashSet<MatrixWagon>();
         }
 
-        public int MatrixxId        {            get;            set;        }
+        public int MatrixxId { get; set; }
 
         public int MatrixNum { get; set; }
 
@@ -26,18 +24,17 @@ namespace ShFLY.DataBase.Models
 
         public Matrixx Copy()
         {
-            return (Matrixx)MemberwiseClone();
+            return (Matrixx)this.MemberwiseClone();
         }
     }
     public class MatrixxConfiguration : EntityTypeConfiguration<Matrixx>
     {
         public MatrixxConfiguration()
         {
-            ToTable("Matrix", "dbo");
-            HasKey(p => p.MatrixxId);//primary key
+            this.ToTable("Matrix", "dbo");
+            this.HasKey(p => p.MatrixxId);// primary key
 
             // this.Property(b => b.MatrixNum).IsUnique();
-
         }
     }
 }

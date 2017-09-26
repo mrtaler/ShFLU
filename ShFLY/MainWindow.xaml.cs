@@ -1,20 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ShFLU.DataBase;
-using ShFLY.DataBase.DAL.Implemtaations;
-using ShFLY.DataBase.DAL.Interfaces;
+﻿using System.Windows;
+
 using ShFLY.SMGS;
 
 namespace ShFLU
@@ -26,7 +11,7 @@ namespace ShFLU
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -34,10 +19,11 @@ namespace ShFLU
             SMGS_View smgs = new SMGS_View();
             smgs.ShowDialog();
         }
+
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-   //         AlllWagView allWag = new AlllWagView();
-     //       allWag.Show();
+   // AlllWagView allWag = new AlllWagView();
+     // allWag.Show();
         }
 
         private void button3_Click(object sender, RoutedEventArgs e)
@@ -49,7 +35,7 @@ namespace ShFLU
         private void button1_Click(object sender, RoutedEventArgs e)
         {
            // MatrixLoad mxLoad = new MatrixLoad();
-       //     mxLoad.ShowDialog();
+       // mxLoad.ShowDialog();
         }
 
     }
