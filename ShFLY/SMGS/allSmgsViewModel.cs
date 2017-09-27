@@ -116,15 +116,7 @@
                 foreach (var wagInSmgses in smgs.WagInSmgses)
                 {
                     var wei = new Weigher(wagInSmgses);
-
-
-
-                    var q1 = wei.getBrutto();
-
-                    var q2 = wei.getDiff();
-                    var q3 = wei.getNetto();
-                    var q4 = wei.getTara();
-                 //   var q5 = wei.lessThenOnePeccent();
+                    var q2 = wei.GetDiff();
 
                    worksheet.Cells[i, 1].Value = i;
                     worksheet.Cells[i, 2].Value = smgs.Smgs;
@@ -138,9 +130,9 @@
                     worksheet.Cells[i, 8].Value = wagInSmgses.Tarapr;
                     worksheet.Cells[i, 9].Value = wagInSmgses.Weightb;
 
-                    worksheet.Cells[i, 10].Value = "0";
-                    worksheet.Cells[i, 11].Value = "0";
-                    worksheet.Cells[i, 12].Value = "0";
+                    worksheet.Cells[i, 10].Value = wei.WeigherTara;
+                    worksheet.Cells[i, 11].Value = wei.WeigherBrutto;
+                    worksheet.Cells[i, 12].Value = wei.WeigherDiff;
 
                     worksheet.Cells[i, 13].Value = "0";
                     worksheet.Cells[i, 14].Value = "%";
