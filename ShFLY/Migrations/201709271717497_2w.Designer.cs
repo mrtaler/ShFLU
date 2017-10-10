@@ -7,13 +7,13 @@ namespace ShFLY.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class init : IMigrationMetadata
+    public sealed partial class _2w : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_2w));
         
         string IMigrationMetadata.Id
         {
-            get { return "201708301152196_init"; }
+            get { return "201709271717497_2w"; }
         }
         
         string IMigrationMetadata.Source

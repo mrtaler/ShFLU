@@ -61,9 +61,21 @@
         /// </returns>
         public string GetDiff()
         {
-            var neettoSmgs = Convert.ToInt32(this.weight);
-            var taraprSmgs = Convert.ToInt32(this.tarapr);
-            var bruttoSmgs = Convert.ToInt32(this.weightb);
+            int neettoSmgs = 0;
+            int taraprSmgs = 0;
+            int bruttoSmgs = 0;
+            if (this.weight!="")
+            {
+                neettoSmgs = Convert.ToInt32(this.weight);
+            }
+            if (this.tarapr != "")
+            {
+                 taraprSmgs = Convert.ToInt32(this.tarapr);
+            }
+            if (this.weightb != "")
+            {
+                 bruttoSmgs = Convert.ToInt32(this.weightb);
+            }
 
             while (!this.LessThenOnePeccent(taraprSmgs, this.GetTara()))
             {
@@ -96,9 +108,14 @@
         /// </returns>
         public decimal GetTara()
         {
-            var taraprSmgs = Convert.ToDecimal(this.tarapr);
+            decimal taraprSmgs = 0;
+            if (this.tarapr!="")
+            {
+                taraprSmgs = Convert.ToDecimal(this.tarapr);
+            }   
+            
             var rnd = new Random(DateTime.UtcNow.Millisecond);
-            var per = Convert.ToDecimal(rnd.Next(-49, 49)) / 1000M;
+            var per = Convert.ToDecimal(rnd.Next(-30, 25)) / 1000M;
             var ret = (taraprSmgs * per) + taraprSmgs;
             this.WeigherTara = Convert.ToInt32(this.RoundTo200Up(ret));
             return ret;
@@ -113,7 +130,7 @@
         public decimal GetBrutto()
         {
             var rnd = new Random(DateTime.UtcNow.Millisecond);
-            var per = Convert.ToDecimal(rnd.Next(-49, 49)) / 1000M;
+            var per = Convert.ToDecimal(rnd.Next(-30, 25)) / 1000M;
             var bruttoSmgs = Convert.ToDecimal(this.weightb);
             var ret = (bruttoSmgs * per) + bruttoSmgs;
             this.WeigherBrutto = Convert.ToInt32(this.RoundTo200Up(ret));
@@ -134,7 +151,12 @@
         /// </returns>
         public bool LessThenOnePeccent(decimal wgthFromSmgs, decimal wgthFromMatrix)
         {
-            var diffPer = (wgthFromMatrix * 100) / wgthFromSmgs;
+            decimal diffPer=0;
+            if (wgthFromSmgs!=0)
+            {
+                 diffPer = (wgthFromMatrix * 100) / wgthFromSmgs;
+            }
+         
 
             decimal per;
             if (diffPer > 100)
