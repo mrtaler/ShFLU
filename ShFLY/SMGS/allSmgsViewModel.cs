@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Documents;
 
 namespace ShFLY.SMGS
 {
@@ -20,10 +22,7 @@ namespace ShFLY.SMGS
         private SmgsNakl selectSmgs;
         public SmgsNakl SelectSmgs
         {
-            get
-            {
-                return this.selectSmgs;
-            }
+            get => this.selectSmgs;
 
             set
             {
@@ -38,17 +37,8 @@ namespace ShFLY.SMGS
         public ObservableCollection<WagInSmgs> AllWagInSmgs
         {
             get
-            {
-                if (this.SelectSmgs != null)
-                {
-                    return new ObservableCollection<WagInSmgs>(this.SelectSmgs.WagInSmgses);
-                }
-                else
-                {
-                    return null;
-                }
-
-            }
+            { return this.SelectSmgs != null ? 
+                    new ObservableCollection<WagInSmgs>(this.SelectSmgs.WagInSmgses) : null; }
         }
 
         public ViewModelCommand EditCommand { get; set; }
@@ -58,8 +48,10 @@ namespace ShFLY.SMGS
         public AllSmgsViewModel()
         {
             this.context = new UnitOfWork();
-            this.AllSmgsNakl = new ObservableCollection<SmgsNakl>(this.context.SmgsNaklRepository.GetAll().OrderBy(p => p.Smgsdat)
-                .Where(p => p.Smgsdat <= DateTime.Parse("30.09.2017") && p.Smgsdat >= DateTime.Parse("20.07.2017")).Where(p => p.Smgs.ToString().Length == 8));
+            this.AllSmgsNakl = new ObservableCollection<SmgsNakl>(this.context.SmgsNaklRepository.GetAll()
+                .OrderBy(p => p.Smgsdat)
+                .Where(p => p.Smgsdat <= DateTime.Parse("30.09.2017") 
+                    && p.Smgsdat >= DateTime.Parse("20.07.2017")));//.Where(p => p.Smgs.ToString().Length == 8));
             this.EditCommand = new ViewModelCommand(this.Edit, true);
             this.DeleteCommand = new ViewModelCommand(this.Delete, true);
             this.CreateXLSCommand = new ViewModelCommand(this.CreateXLS, true);
@@ -122,11 +114,11 @@ namespace ShFLY.SMGS
                     // var name = smgs.Smgs.ToString();
 
                     // Add some items...
-
+                    List<Weigher> weiList = new List<Weigher>();
                     foreach (var wagInSmgses in smgs.WagInSmgses)
                     {
                         var wei = new Weigher(wagInSmgses);
-                        var q2 = wei.GetDiff();
+                        wei.GetDiff();
 
                         worksheet.Cells[i, 1].Value = i;
                         worksheet.Cells[i, 2].Value = smgs.Smgs;
@@ -142,13 +134,20 @@ namespace ShFLY.SMGS
                         worksheet.Cells[i, 9].Value = wei.WeigherBrutto;
                         worksheet.Cells[i, 10].Value = wei.WeigherDiff;
 
+                        worksheet.Cells[i, 11].Value = wei.WeigherDiffNotPer;
+                        worksheet.Cells[i, 12].Value = wei.WeigherDiffPer;
+                        weiList.Add(wei);
 
 
                         i++;
                     }
+                    worksheet.Cells[i, 1].Value = "ИТОГО";
+                    worksheet.Cells[i, 11].Value = weiList.Sum(p => p.WeigherDiffNotPer);
+                    worksheet.Cells[i, 12].Value =
+                        100 - weiList.Sum(p => p.WeigherDiff) * 100 / weiList.Sum(p => p.neettoSmgs);
                     i++;
-
-                    // Add a formula for the value-column
+                }
+                // Add a formula for the value-column
 
                     // worksheet.Cells["E2:E4"].Formula = "C2*D2";
 
@@ -210,7 +209,7 @@ namespace ShFLY.SMGS
 
                     // save our new workbook and we are done!
                     package.Save();
-                }
+                
             }
         }
 

@@ -42,7 +42,7 @@
         /// Gets or sets the weigher tara.
         /// </summary>
         public int WeigherTara { get; set; }
-
+        public decimal neettoSmgs { get; set; }
         /// <summary>
         /// Gets or sets the weigher brutto.
         /// </summary>
@@ -53,41 +53,73 @@
         /// </summary>
         public int WeigherDiff { get; set; }
 
+        public int WeigherDiffNotPer { get; set; }
+
+        public decimal WeigherDiffPer { get; set; }
+
         /// <summary>
         /// The get diff.
         /// </summary>
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public string GetDiff()
+        public void GetDiff()
         {
-            int neettoSmgs = 0;
-            int taraprSmgs = 0;
-            int bruttoSmgs = 0;
             if (this.weight!="")
             {
-                neettoSmgs = Convert.ToInt32(this.weight);
+                neettoSmgs = Convert.ToDecimal(this.weight);
             }
+          
             if (this.tarapr != "")
             {
-                 taraprSmgs = Convert.ToInt32(this.tarapr);
+                var taraprSmgs = Convert.ToInt32(this.tarapr);
+                while (!this.LessThenOnePeccent(taraprSmgs, this.GetTara()))
+                {
+                }
+
             }
             if (this.weightb != "")
             {
-                 bruttoSmgs = Convert.ToInt32(this.weightb);
+                var bruttoSmgs = Convert.ToInt32(this.weightb);
+                while (!this.LessThenOnePeccent(bruttoSmgs, this.GetBrutto()))
+                {
+                }
             }
 
-            while (!this.LessThenOnePeccent(taraprSmgs, this.GetTara()))
+           
+
+           
+
+
+            this.GetNetto();
+
+            if (this.tarapr == "")
             {
+                while (!this.LessThenOnePeccent(neettoSmgs, this.getNetto1()))
+                {
+                }
             }
 
-            while (!this.LessThenOnePeccent(bruttoSmgs, this.GetBrutto()))
-            {
-            }
+            WeigherDiffNotPer = WeigherDiff - Convert.ToInt32(this.weight);
+            WeigherDiffPer = WeigherDiffNotPer * 100 / Convert.ToDecimal(this.weight);
 
-            return this.LessThenOnePeccent(neettoSmgs, this.GetNetto()).ToString();
         }
 
+
+        public decimal getNetto1()
+        {
+            decimal nettoSmgs = 0;
+            if (this.weight != "")
+            {
+                nettoSmgs = Convert.ToDecimal(this.weight);
+            }
+
+            var rnd = new Random(DateTime.UtcNow.Millisecond);
+            var per = Convert.ToDecimal(rnd.Next(-20, 20)) / 1000M;
+            var ret = (nettoSmgs * per) + nettoSmgs;
+            this.WeigherDiff = Convert.ToInt32(this.RoundTo200Up(ret));
+            return ret;
+        }
         /// <summary>
         /// The get netto.
         /// </summary>
@@ -115,7 +147,7 @@
             }   
             
             var rnd = new Random(DateTime.UtcNow.Millisecond);
-            var per = Convert.ToDecimal(rnd.Next(-30, 25)) / 1000M;
+            var per = Convert.ToDecimal(rnd.Next(-20, 20)) /1000M;
             var ret = (taraprSmgs * per) + taraprSmgs;
             this.WeigherTara = Convert.ToInt32(this.RoundTo200Up(ret));
             return ret;
@@ -130,7 +162,7 @@
         public decimal GetBrutto()
         {
             var rnd = new Random(DateTime.UtcNow.Millisecond);
-            var per = Convert.ToDecimal(rnd.Next(-30, 25)) / 1000M;
+            var per = Convert.ToDecimal(rnd.Next(-20, 20)) / 1000M;
             var bruttoSmgs = Convert.ToDecimal(this.weightb);
             var ret = (bruttoSmgs * per) + bruttoSmgs;
             this.WeigherBrutto = Convert.ToInt32(this.RoundTo200Up(ret));
@@ -168,7 +200,7 @@
                 per = 100 - diffPer;
             }
 
-            return -1 <= per && per <= 1;
+            return -0.95M <= per && per <=0.95M;
         }
 
         /// <summary>
