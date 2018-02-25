@@ -1,6 +1,7 @@
 ﻿namespace ShFLY.SMGS
 {
     using System;
+    using System.Windows;
 
     using ShFLY.DataBase.Models;
 
@@ -24,6 +25,8 @@
         /// </summary>
         private readonly string weightb;
 
+        private WagInSmgs wagInSmgs;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Weigher"/> class.
         /// </summary>
@@ -32,6 +35,7 @@
         /// </param>
         public Weigher(WagInSmgs wagInSmgs)
         {
+            this.wagInSmgs = wagInSmgs;
             // : base(wagInSmgs)
             this.tarapr = wagInSmgs.Tarapr;
             this.weightb = wagInSmgs.Weightb;
@@ -73,30 +77,49 @@
             if (this.tarapr != "")
             {
                 var taraprSmgs = Convert.ToInt32(this.tarapr);
+                int i = 0;
                 while (!this.LessThenOnePeccent(taraprSmgs, this.GetTara()))
                 {
+                    i++;
+                    if (i> 100_000)
+                    {
+                        //    MessageBox.Show("x");
+                        break;
+
+                    }
                 }
 
             }
             if (this.weightb != "")
             {
                 var bruttoSmgs = Convert.ToInt32(this.weightb);
+                int i = 0;
                 while (!this.LessThenOnePeccent(bruttoSmgs, this.GetBrutto()))
                 {
+                    i++;
+                    if (i > 100_000)
+                    {
+                        //    MessageBox.Show("x");
+                        break;
+
+                    }
                 }
             }
-
-           
-
-           
-
 
             this.GetNetto();
 
             if (this.tarapr == "")
             {
+                int i = 0;
                 while (!this.LessThenOnePeccent(neettoSmgs, this.getNetto1()))
                 {
+                    i++;
+                    if (i > 100_000)
+                    {
+                    //    MessageBox.Show("x");
+                        break;
+
+                    }
                 }
             }
 

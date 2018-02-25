@@ -131,6 +131,6 @@
             VerticalAlignment="Bottom"
             Command="{Binding CreateXLSCommand}"
             CommandParameter="{Binding ElementName=ListBox1, Path=SelectedItem}"
-            Content="del" />
+            Content="Xls" />
     </Grid>
 </Window>
