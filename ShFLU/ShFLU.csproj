@@ -116,11 +116,6 @@
       <DependentUpon>OpenFromDbView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Matrix\OpenFromDB\OpenFromDbViewModel.cs" />
-    <Compile Include="Migrations\201805110753198_InitDB.cs" />
-    <Compile Include="Migrations\201805110753198_InitDB.Designer.cs">
-      <DependentUpon>201805110753198_InitDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MVVM\ViewModelBase.cs" />
     <Compile Include="MVVM\ViewModelCommand.cs" />
     <Compile Include="Resource1.Designer.cs">
@@ -196,9 +191,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201805110753198_InitDB.resx">
-      <DependentUpon>201805110753198_InitDB.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
