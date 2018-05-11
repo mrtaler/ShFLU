@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace ShFLY.SMGS
 {
     class SmgsSeriallXML
     {
+        private const string V = "mm dd yyyy";
         private IRepository<SmgsNakl> SmgsNaklRepository;
         private IRepository<Wagon> WagonRepository;
         private IUnitOfWork unitOfWork;
@@ -58,7 +60,12 @@ namespace ShFLY.SMGS
                         {
                             smgsNak = new SmgsNakl();
                             smgsNak.Smgs = Convert.ToInt32(smgsXElement.Element("data").Element("smgs").Value);
-                            smgsNak.Smgsdat = Convert.ToDateTime(smgsXElement.Element("data").Element("smgsdat").Value);
+                            var cul = new CultureInfo("ru-ru");
+                            var strin = smgsXElement.Element("data").Element("smgsdat").Value                                ;
+
+                            DateTime parsedDate = DateTime.Parse(strin,cul);
+
+                            smgsNak.Smgsdat = parsedDate;
                             smgsNak.mnet = smgsXElement.Element("data").Element("mnet").Value;
                             smgsNak.mbrt = smgsXElement.Element("data").Element("mbrt").Value;
                         }

@@ -83,7 +83,7 @@ namespace ShFLY.SMGS
                 {
                     // var smgs = (SmgsNakl)param;
 
-                    FileInfo newFile = new FileInfo($"e:\\cd\\{smgs.Smgsdat.ToString("yyyy-MM-dd")}_{smgs.Smgs}.xlsx");
+                    FileInfo newFile = new FileInfo($"d:\\cd\\{smgs.Smgsdat.ToString("yyyy-MM-dd")}_{smgs.Smgs}.xlsx");
                     if (newFile.Exists)
                     {
                         newFile.Delete(); // ensures we create a new workbook
