@@ -21,6 +21,7 @@ namespace ShFLY.SMGS
         private IRepository<SmgsNakl> SmgsNaklRepository;
         private IRepository<Wagon> WagonRepository;
         private IUnitOfWork unitOfWork;
+
         public SmgsSeriallXML(string filePatch, IUnitOfWork context)
         {
             this.unitOfWork = context;
@@ -61,9 +62,9 @@ namespace ShFLY.SMGS
                             smgsNak = new SmgsNakl();
                             smgsNak.Smgs = Convert.ToInt32(smgsXElement.Element("data").Element("smgs").Value);
                             var cul = new CultureInfo("ru-ru");
-                            var strin = smgsXElement.Element("data").Element("smgsdat").Value                                ;
+                            var strin = smgsXElement.Element("data").Element("smgsdat").Value;
 
-                            DateTime parsedDate = DateTime.Parse(strin,cul);
+                            DateTime parsedDate = DateTime.Parse(strin, cul);
 
                             smgsNak.Smgsdat = parsedDate;
                             smgsNak.mnet = smgsXElement.Element("data").Element("mnet").Value;
@@ -134,9 +135,10 @@ namespace ShFLY.SMGS
                 if (smgsNak.SmgsId == 0)
                 {
                     this.SmgsNaklRepository.Create(smgsNak);
-                }
 
+                }
                 this.unitOfWork.SaveChanges();
+
             }
             else
             {

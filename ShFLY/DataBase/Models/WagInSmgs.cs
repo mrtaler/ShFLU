@@ -1,5 +1,6 @@
 ﻿namespace ShFLY.DataBase.Models
 {
+    using ShFLY.SMGS;
     using System.Data.Entity.ModelConfiguration;
 
     /// <summary>
@@ -83,6 +84,8 @@
         /// Gets or sets the matrix wagon brutto.
         /// </summary>
         public virtual MatrixWagon MatrixWagonBrutto { get; set; }
+        public bool IsWeigherCalc { get; set; }
+        public virtual Weigher Weigher { get; set; }
     }
 
     /// <summary>
@@ -105,6 +108,9 @@
 
             // config one-to-many Wagon
             this.HasRequired(t => t.Wagon).WithMany(t => t.WagInSmgses).HasForeignKey(x => x.WgaonId);
+
+            this.HasOptional(o => o.Weigher)
+               .WithRequired(r => r.wagInSmgs);
         }
     }
 }

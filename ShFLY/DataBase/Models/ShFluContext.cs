@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 
 using ShFLY.DataBase.Models;
+using ShFLY.SMGS;
 
 namespace ShFLU.DataBase
 {
@@ -21,8 +22,10 @@ namespace ShFLU.DataBase
         public virtual DbSet<MatrixWagon> MatrixWagonDbSet { get; set; }
         public virtual DbSet<Matrixx> MatrixxDbSet { get; set; }
 
-        // public virtual DbSet<TaraBruttoFromMatrix> TaraBruttoFromMatrixdDbSet { get; set; }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+
+        public virtual DbSet<Weigher> Weighers{ get; set; }
+    // public virtual DbSet<TaraBruttoFromMatrix> TaraBruttoFromMatrixdDbSet { get; set; }
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
 

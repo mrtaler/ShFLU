@@ -12,37 +12,39 @@
     <Grid>
         <Button
             x:Name="button"
-            Width="75"
+            Width="164"
+            Height="29"
             Margin="10,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="button_Click"
-            Content="Button" />
+            Content="Загрузка СМГС из файла" />
         <Button
             Name="button2"
             Width="75"
             Height="23"
-            Margin="12,41,0,0"
+            Margin="88,147,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="button2_Click"
             Content="AllVag" />
         <Button
             Name="button3"
-            Width="75"
-            Height="23"
-            Margin="93,12,0,0"
+            Width="164"
+            Height="33"
+            Margin="10,44,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="button3_Click"
-            Content="Button" />
+            Content="Загруженные СМГС" />
         <Button
             x:Name="button1"
             Width="75"
             Margin="208,41,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="LoadMatrix" Click="button1_Click" />
+            Click="button1_Click"
+            Content="LoadMatrix" />
 
     </Grid>
 </Window>

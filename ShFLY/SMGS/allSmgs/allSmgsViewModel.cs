@@ -23,7 +23,6 @@ namespace ShFLY.SMGS
         public SmgsNakl SelectSmgs
         {
             get => this.selectSmgs;
-
             set
             {
                 if (this.selectSmgs != value)
@@ -44,36 +43,85 @@ namespace ShFLY.SMGS
         }
 
         public ViewModelCommand EditCommand { get; set; }
-        public ViewModelCommand DeleteCommand { get; set; }
+        public ViewModelCommand CalcWeigthCommand { get; set; }
         public ViewModelCommand CreateXLSCommand { get; set; }
+        public ViewModelCommand SaveBruttoMatrixCommand { get; set; }
 
         public AllSmgsViewModel()
         {
             this.context = new UnitOfWork();
-            this.AllSmgsNakl = new ObservableCollection<SmgsNakl>(this.context.SmgsNaklRepository.GetAll()
-                .OrderBy(p => p.Smgsdat)
-                              /* .Where(p => p.Smgsdat <= DateTime.Parse("30.09.2017") 
-                                   && p.Smgsdat >= DateTime.Parse("20.07.2017"))*/);//.Where(p => p.Smgs.ToString().Length == 8));
-            this.EditCommand = new ViewModelCommand(this.Edit, true);
-            this.DeleteCommand = new ViewModelCommand(this.Delete, true);
-            this.CreateXLSCommand = new ViewModelCommand(this.CreateXLS, true);
+            this.AllSmgsNakl = new ObservableCollection<SmgsNakl>
+                (this.context.SmgsNaklRepository.GetAll()
+                .OrderBy(p => p.Smgsdat));
 
+            this.EditCommand =
+                new ViewModelCommand(this.Edit, true);
+            this.CalcWeigthCommand =
+                new ViewModelCommand(this.CalcWeigth, true);
+            this.CreateXLSCommand =
+                new ViewModelCommand(this.CreateXLS, true);
+            this.SaveBruttoMatrixCommand =
+                new ViewModelCommand(this.SaveBruttoMatrix, true);
         }
 
         private void Edit(object param)
         {
-            FindMatrixView win = new FindMatrixView((WagInSmgs)param, this.context);
+            FindMatrixView win = new FindMatrixView(
+                (WagInSmgs)param, this.context);
             win.ShowDialog();
-
-            // MessageBox.Show(((WagInSmgs)param).Wagon.Nwag.ToString());
         }
+        private void SaveBruttoMatrix(object param)
+        {
 
+            if (param is SmgsNakl smgs)
+            {
+                string newFile = $"d:\\cd\\{smgs.Smgsdat.ToString("yyyy-MM-dd")}_{smgs.Smgs}.txt";
+
+                using (StreamWriter output = new StreamWriter(
+                    Path.GetFullPath(newFile)))
+                {
+                    foreach (var item in new MatrixForm(smgs, MatrixType.Brutto).SmgsToMatrix().Split('\n'))
+                    {
+                        output.WriteLine(item);
+                    }
+                   
+                }
+            }
+        }
         private void Delete(object param)
         {
             this.AllSmgsNakl.Remove((SmgsNakl)param);
             this.context.SmgsNaklRepository.Delete((SmgsNakl)param);
             this.context.SaveChanges();
         }
+
+        private void CalcWeigth(object param)
+        {
+            if (param is SmgsNakl smgs)
+            {
+                if (smgs.etsngc != "421034" && !smgs.IsWeigherCalc)
+                {
+                    List<Weigher> weiList = new List<Weigher>();
+
+                    foreach (var wagInSmgses in smgs.WagInSmgses)
+                    {
+                        if (wagInSmgses.Weight == "0")
+                        {
+                            wagInSmgses.Weight = "1";
+                        }
+                        var wei = new Weigher(wagInSmgses);
+                        wei.GetDiff();
+                        wei.wagInSmgs.IsWeigherCalc = true;
+
+                        context.WeigherRepository.Create(wei);
+                    }
+                    smgs.IsWeigherCalc = true;
+                    context.SmgsNaklRepository.Update(smgs);
+                    context.SaveChanges();
+                }
+            }
+        }
+
 
         private void CreateXLS(object param)
         {
@@ -121,7 +169,7 @@ namespace ShFLY.SMGS
                         List<Weigher> weiList = new List<Weigher>();
                         foreach (var wagInSmgses in smgs.WagInSmgses)
                         {
-                            if (wagInSmgses.Weight=="0")
+                            if (wagInSmgses.Weight == "0")
                             {
                                 wagInSmgses.Weight = "1";
                             }

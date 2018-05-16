@@ -1,6 +1,7 @@
 ﻿namespace ShFLY.SMGS
 {
     using System;
+    using System.Data.Entity.ModelConfiguration;
     using System.Windows;
 
     using ShFLY.DataBase.Models;
@@ -10,6 +11,7 @@
     /// </summary>
     public class Weigher
     {
+        public int WeigherId { get; set; }
         /// <summary>
         /// The weight.
         /// </summary>
@@ -25,7 +27,9 @@
         /// </summary>
         private readonly string weightb;
 
-        private WagInSmgs wagInSmgs;
+        public virtual WagInSmgs wagInSmgs { get; set; }
+
+        public Weigher() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Weigher"/> class.
@@ -36,7 +40,6 @@
         public Weigher(WagInSmgs wagInSmgs)
         {
             this.wagInSmgs = wagInSmgs;
-            // : base(wagInSmgs)
             this.tarapr = wagInSmgs.Tarapr;
             this.weightb = wagInSmgs.Weightb;
             this.weight = wagInSmgs.Weight;
@@ -46,7 +49,10 @@
         /// Gets or sets the weigher tara.
         /// </summary>
         public int WeigherTara { get; set; }
+
+
         public decimal neettoSmgs { get; set; }
+
         /// <summary>
         /// Gets or sets the weigher brutto.
         /// </summary>
@@ -61,6 +67,8 @@
 
         public decimal WeigherDiffPer { get; set; }
 
+        public decimal VagonSpeed { get; set; }
+
         /// <summary>
         /// The get diff.
         /// </summary>
@@ -69,11 +77,11 @@
         /// </returns>
         public void GetDiff()
         {
-            if (this.weight!="")
+            if (this.weight != "")
             {
                 neettoSmgs = Convert.ToDecimal(this.weight);
             }
-          
+
             if (this.tarapr != "")
             {
                 var taraprSmgs = Convert.ToInt32(this.tarapr);
@@ -81,7 +89,7 @@
                 while (!this.LessThenOnePeccent(taraprSmgs, this.GetTara()))
                 {
                     i++;
-                    if (i> 100_000)
+                    if (i > 100_000)
                     {
                         //    MessageBox.Show("x");
                         break;
@@ -116,7 +124,7 @@
                     i++;
                     if (i > 100_000)
                     {
-                    //    MessageBox.Show("x");
+                        //    MessageBox.Show("x");
                         break;
 
                     }
@@ -126,8 +134,14 @@
             WeigherDiffNotPer = WeigherDiff - Convert.ToInt32(this.weight);
             WeigherDiffPer = WeigherDiffNotPer * 100 / Convert.ToDecimal(this.weight);
 
+            VagonSpeed = getVagonSpeed();
         }
-
+        private decimal getVagonSpeed()
+        {
+            var rnd = new Random(DateTime.UtcNow.Millisecond);
+            var per = Convert.ToDecimal(rnd.Next(100,490)) / 100M;
+            return per;
+        }
 
         public decimal getNetto1()
         {
@@ -246,6 +260,15 @@
             }
 
             return i;
+        }
+    }
+
+    public class WeigherConfiguration : EntityTypeConfiguration<Weigher>
+    {
+        public WeigherConfiguration()
+        {
+            this.ToTable("Weigher", "dbo");
+           
         }
     }
 }

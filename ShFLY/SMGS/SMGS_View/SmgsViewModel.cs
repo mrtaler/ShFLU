@@ -10,16 +10,14 @@ namespace ShFLY.SMGS
 {
     class SmgsViewModel : ViewModelBase
     {
-        private IUnitOfWork context = new UnitOfWork();
+        private readonly IUnitOfWork context =
+            new UnitOfWork();
         private string[] XMLSmgsWagonPatch;
         private int _count;
+
         public int Count
         {
-            get
-            {
-                return this._count;
-            }
-
+            get { return this._count; }
             set
             {
                 if (this._count != value)
@@ -35,8 +33,10 @@ namespace ShFLY.SMGS
 
         public SmgsViewModel()
         {
-            this.LoadSmgsCommand = new ViewModelCommand(this.LoadSmgs, true);
-            this.SerializeSmgsCommand = new ViewModelCommand(this.SerializeSmgs, false);
+            this.LoadSmgsCommand =
+                new ViewModelCommand(this.LoadSmgs, true);
+            this.SerializeSmgsCommand =
+                new ViewModelCommand(this.SerializeSmgs, false);
         }
 
 
@@ -46,8 +46,7 @@ namespace ShFLY.SMGS
             string filter = "GCS Skill files (*." + str + ")| *." + str + "| All Files(*.*) | *.* ";
             OpenFileDialog dlg = new OpenFileDialog();
 
-            // dlg.InitialDirectory = @"D:\ДокументыЛинкевич\ПРИХОД ШФУ\ЕТК\02";
-            dlg.InitialDirectory = @"C:\Users\Derdan\Dropbox\Work\Matrix";
+            dlg.InitialDirectory = @"C:\";
 
             dlg.Filter = filter;
             dlg.Multiselect = true;
@@ -65,11 +64,12 @@ namespace ShFLY.SMGS
             this.Count = 0;
             foreach (var item in this.XMLSmgsWagonPatch)
             {
-                SmgsSeriallXML neSeriallXml = new SmgsSeriallXML(item, this.context);
-                this.Count+=1;
+                SmgsSeriallXML neSeriallXml = 
+                    new SmgsSeriallXML(item, this.context);
+                ++this.Count;
             }
-            
-            MessageBox.Show("done");
+
+            MessageBox.Show("Загрузка завершена");
         }
 
     }

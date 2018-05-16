@@ -1,7 +1,7 @@
 ﻿using System;
 
 using ShFLY.DataBase.Models;
-
+using ShFLY.SMGS;
 using TicketSaleCore.Models;
 
 namespace ShFLY.DataBase.DAL.Interfaces
@@ -15,6 +15,6 @@ namespace ShFLY.DataBase.DAL.Interfaces
         IRepository<SmgsNakl> SmgsNaklRepository { get; }
         IRepository<WagInSmgs> WagInSmgsRepository { get; }
         IRepository<Wagon> WagonRepository { get; }
-              
+        IRepository<Weigher> WeigherRepository { get; }
     }
 }

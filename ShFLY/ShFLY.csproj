@@ -115,19 +115,40 @@
     <Compile Include="Migrations\201709271717497_2w.Designer.cs">
       <DependentUpon>201709271717497_2w.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805160808110_Weigth.cs" />
+    <Compile Include="Migrations\201805160808110_Weigth.Designer.cs">
+      <DependentUpon>201805160808110_Weigth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805160825431_Weigth1.cs" />
+    <Compile Include="Migrations\201805160825431_Weigth1.Designer.cs">
+      <DependentUpon>201805160825431_Weigth1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805160829086_Weigth2.cs" />
+    <Compile Include="Migrations\201805160829086_Weigth2.Designer.cs">
+      <DependentUpon>201805160829086_Weigth2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805160846334_Weigth4.cs" />
+    <Compile Include="Migrations\201805160846334_Weigth4.Designer.cs">
+      <DependentUpon>201805160846334_Weigth4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805160925413_Weigth5.cs" />
+    <Compile Include="Migrations\201805160925413_Weigth5.Designer.cs">
+      <DependentUpon>201805160925413_Weigth5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="SMGS\allSmgsView.xaml.cs">
+    <Compile Include="SMGS\allSmgs\allSmgsView.xaml.cs">
       <DependentUpon>allSmgsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SMGS\allSmgsViewModel.cs" />
+    <Compile Include="SMGS\allSmgs\allSmgsViewModel.cs" />
+    <Compile Include="SMGS\allSmgs\MatrixForm.cs" />
     <Compile Include="SMGS\ExcelPackage.cs" />
     <Compile Include="SMGS\FindMatrixView.xaml.cs">
       <DependentUpon>FindMatrixView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SMGS\FindMatrixViewModel.cs" />
     <Compile Include="SMGS\SmgsSeriallXML.cs" />
-    <Compile Include="SMGS\SmgsViewModel.cs" />
-    <Compile Include="SMGS\SMGS_View.xaml.cs">
+    <Compile Include="SMGS\SMGS_View\SmgsViewModel.cs" />
+    <Compile Include="SMGS\SMGS_View\SMGS_View.xaml.cs">
       <DependentUpon>SMGS_View.xaml</DependentUpon>
     </Compile>
     <Compile Include="SMGS\Specifications\FindSmgsBySmgsNum.cs" />
@@ -147,7 +168,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SMGS\allSmgsView.xaml">
+    <Page Include="SMGS\allSmgs\allSmgsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,7 +176,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SMGS\SMGS_View.xaml">
+    <Page Include="SMGS\SMGS_View\SMGS_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,6 +197,21 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201709271717497_2w.resx">
       <DependentUpon>201709271717497_2w.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805160808110_Weigth.resx">
+      <DependentUpon>201805160808110_Weigth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805160825431_Weigth1.resx">
+      <DependentUpon>201805160825431_Weigth1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805160829086_Weigth2.resx">
+      <DependentUpon>201805160829086_Weigth2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805160846334_Weigth4.resx">
+      <DependentUpon>201805160846334_Weigth4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805160925413_Weigth5.resx">
+      <DependentUpon>201805160925413_Weigth5.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

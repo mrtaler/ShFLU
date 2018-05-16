@@ -56,6 +56,10 @@ namespace ShFLY.DataBase.Models
         /// </summary>
         public string mbrt { get; set; }
 
+
+        public bool IsWeigherCalc { get; set; }
+
+
         /// <summary>
         /// SMGS Wagon
         /// </summary>

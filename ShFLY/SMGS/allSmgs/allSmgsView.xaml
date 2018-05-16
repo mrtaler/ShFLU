@@ -9,9 +9,33 @@
         <DataGrid
             Name="ListBox1"
             Margin="12,12,432,31"
+            AutoGenerateColumns="False"
             DisplayMemberPath="Smgs"
             ItemsSource="{Binding AllSmgsNakl}"
-            SelectedItem="{Binding SelectSmgs, UpdateSourceTrigger=PropertyChanged}" />
+            SelectedItem="{Binding SelectSmgs, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    x:Name="smgsId"
+                    Binding="{Binding Path=SmgsId}"
+                    Header="smgsId"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    x:Name="smgsNum"
+                    Binding="{Binding Path=Smgs}"
+                    Header="№"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    x:Name="Smgsdat"
+                    Binding="{Binding Path=Smgsdat, StringFormat=d, ConverterCulture=ru-RU}"
+                    Header="Дата СМГС"
+                    IsReadOnly="True" />
+                <DataGridCheckBoxColumn
+                    x:Name="IsWeigherCalc"
+                    Binding="{Binding Path=IsWeigherCalc}"
+                    Header="Расчёт веса"
+                    IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
         <DataGrid
             Name="DataGrid1"
             Width="397"
@@ -81,8 +105,8 @@
         <TextBox
             x:Name="textBox_Copy"
             Width="125"
-            Height="23"
-            Margin="355,38,0,0"
+            Height="30"
+            Margin="350,38,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Text="{Binding Path=SelectSmgs.gngc}"
@@ -90,7 +114,7 @@
         <TextBox
             x:Name="textBox_Copy1"
             Width="125"
-            Height="23"
+            Height="30"
             Margin="485,38,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -99,7 +123,7 @@
         <TextBox
             x:Name="textBox_Copy2"
             Width="132"
-            Height="23"
+            Height="30"
             Margin="615,38,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
@@ -115,22 +139,31 @@
             Text="{Binding Path=SelectSmgs.mbrt}"
             TextWrapping="Wrap" />
         <Button
-            Width="75"
+            Width="143"
             Height="20"
             Margin="12,0,0,5"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Command="{Binding DeleteCommand}"
+            Command="{Binding CalcWeigthCommand}"
             CommandParameter="{Binding ElementName=ListBox1, Path=SelectedItem}"
-            Content="del" />
+            Content="Расчёт матрикса" />
         <Button
             Width="75"
             Height="20"
-            Margin="91,0,0,5"
+            Margin="350,0,0,5"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Command="{Binding CreateXLSCommand}"
             CommandParameter="{Binding ElementName=ListBox1, Path=SelectedItem}"
             Content="Xls" />
+        <Button
+            Width="167"
+            Height="20"
+            Margin="160,0,0,5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Command="{Binding SaveBruttoMatrixCommand}"
+            CommandParameter="{Binding ElementName=ListBox1, Path=SelectedItem}"
+            Content="Выгрузка Матрикса Брутто" />
     </Grid>
 </Window>

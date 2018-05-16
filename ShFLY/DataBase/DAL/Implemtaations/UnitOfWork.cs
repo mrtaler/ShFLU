@@ -5,7 +5,7 @@ using ShFLU.DataBase;
 
 using ShFLY.DataBase.DAL.Interfaces;
 using ShFLY.DataBase.Models;
-
+using ShFLY.SMGS;
 using TicketSaleCore.Models;
 
 namespace ShFLY.DataBase.DAL.Implemtaations
@@ -74,5 +74,9 @@ namespace ShFLY.DataBase.DAL.Implemtaations
             get { return new GenericRepository<Wagon>(this.context); }
         }
 
+        public IRepository<Weigher> WeigherRepository
+        {
+            get { return new GenericRepository<Weigher>(this.context); }
+        }
     }
 }
