@@ -150,7 +150,7 @@
         <Button
             Width="75"
             Height="20"
-            Margin="350,0,0,5"
+            Margin="672,0,0,6"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Command="{Binding CreateXLSCommand}"
@@ -165,5 +165,14 @@
             Command="{Binding SaveBruttoMatrixCommand}"
             CommandParameter="{Binding ElementName=ListBox1, Path=SelectedItem}"
             Content="Выгрузка Матрикса Брутто" />
+        <Button
+            Width="167"
+            Height="20"
+            Margin="350,0,0,5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Command="{Binding SaveTaraMatrixCommand}"
+            CommandParameter="{Binding SelectedItem, ElementName=ListBox1}"
+            Content="Выгрузка Матрикса Тара" />
     </Grid>
 </Window>

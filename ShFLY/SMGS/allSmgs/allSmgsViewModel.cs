@@ -46,6 +46,7 @@ namespace ShFLY.SMGS
         public ViewModelCommand CalcWeigthCommand { get; set; }
         public ViewModelCommand CreateXLSCommand { get; set; }
         public ViewModelCommand SaveBruttoMatrixCommand { get; set; }
+        public ViewModelCommand SaveTaraMatrixCommand { get; set; }
 
         public AllSmgsViewModel()
         {
@@ -62,6 +63,8 @@ namespace ShFLY.SMGS
                 new ViewModelCommand(this.CreateXLS, true);
             this.SaveBruttoMatrixCommand =
                 new ViewModelCommand(this.SaveBruttoMatrix, true);
+            this.SaveTaraMatrixCommand =
+               new ViewModelCommand(this.SaveTaraMatrix, true);
         }
 
         private void Edit(object param)
@@ -70,21 +73,41 @@ namespace ShFLY.SMGS
                 (WagInSmgs)param, this.context);
             win.ShowDialog();
         }
+
         private void SaveBruttoMatrix(object param)
         {
 
-            if (param is SmgsNakl smgs)
+            if (param is SmgsNakl smgs&& smgs.IsWeigherCalc)
             {
-                string newFile = $"d:\\cd\\{smgs.Smgsdat.ToString("yyyy-MM-dd")}_{smgs.Smgs}.txt";
+                string newFile = $"d:\\cd\\{smgs.Smgsdat.ToString("yyyy-MM-dd")}_{MatrixTypes.Brutto}_{smgs.Smgs}.txt";
 
                 using (StreamWriter output = new StreamWriter(
                     Path.GetFullPath(newFile)))
                 {
-                    foreach (var item in new MatrixForm(smgs, MatrixType.Brutto).SmgsToMatrix().Split('\n'))
+                    foreach (var item in new MatrixForm(smgs, MatrixTypes.Brutto).SmgsToMatrix().Split('\n'))
                     {
                         output.WriteLine(item);
                     }
                    
+                }
+            }
+        }
+
+        private void SaveTaraMatrix(object param)
+        {
+
+            if (param is SmgsNakl smgs && smgs.IsWeigherCalc)
+            {
+                string newFile = $"d:\\cd\\{smgs.Smgsdat.ToString("yyyy-MM-dd")}_{MatrixTypes.Tara}_{smgs.Smgs}.txt";
+
+                using (StreamWriter output = new StreamWriter(
+                    Path.GetFullPath(newFile)))
+                {
+                    foreach (var item in new MatrixForm(smgs, MatrixTypes.Tara).SmgsToMatrix().Split('\n'))
+                    {
+                        output.WriteLine(item);
+                    }
+
                 }
             }
         }
@@ -125,7 +148,7 @@ namespace ShFLY.SMGS
 
         private void CreateXLS(object param)
         {
-            foreach (var smgs in AllSmgsNakl)
+            if (param is SmgsNakl smgs && smgs.IsWeigherCalc)
             {
                 if (smgs.etsngc != "421034")
                 {
@@ -137,8 +160,6 @@ namespace ShFLY.SMGS
                         newFile.Delete(); // ensures we create a new workbook
                                           //  newFile = new FileInfo(@"D:\sample1.xlsx");
                     }
-
-
 
                     using (ExcelPackage package = new ExcelPackage(newFile))
                     {
@@ -173,8 +194,7 @@ namespace ShFLY.SMGS
                             {
                                 wagInSmgses.Weight = "1";
                             }
-                            var wei = new Weigher(wagInSmgses);
-                            wei.GetDiff();
+                            Weigher wei = wagInSmgses.Weigher;
 
                             worksheet.Cells[i, 1].Value = i;
                             worksheet.Cells[i, 2].Value = smgs.Smgs;
@@ -203,32 +223,7 @@ namespace ShFLY.SMGS
                             100 - weiList.Sum(p => p.WeigherDiff) * 100 / weiList.Sum(p => p.neettoSmgs);
                         i++;
 
-                        // Add a formula for the value-column
-
-                        // worksheet.Cells["E2:E4"].Formula = "C2*D2";
-
-                        ////Ok now format the values;
-                        // using (var range = worksheet.Cells[1, 1, 1, 5])
-                        // {
-                        // range.Style.Font.Bold = true;
-                        // range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                        // //range.Style.Fill.BackgroundColor.SetColor(System.Windows.Media.Color.DarkBlue);
-                        // // range.Style.Font.Color.SetColor(Color.White);
-                        // }
-
-                        // worksheet.Cells["A5:E5"].Style.Border.Top.Style = ExcelBorderStyle.Thin;
-                        // worksheet.Cells["A5:E5"].Style.Font.Bold = true;
-
-                        // worksheet.Cells[5, 3, 5, 5].Formula = string.Format("SUBTOTAL(9,{0})", new ExcelAddress(2, 3, 4, 3).Address);
-                        // worksheet.Cells["C2:C5"].Style.Numberformat.Format = "#,##0";
-                        // worksheet.Cells["D2:E5"].Style.Numberformat.Format = "#,##0.00";
-
-                        ////Create an autofilter for the range
-                        // worksheet.Cells["A1:E4"].AutoFilter = true;
-
-                        // worksheet.Cells["A1:E5"].AutoFitColumns(0);
-
-                        // lets set the header text 
+                     
                         worksheet.HeaderFooter.OddHeader.CenteredText = "&24&U&\"Arial,Regular Bold\" Weigth";
 
                         // add the page number to the footer plus the total number of pages

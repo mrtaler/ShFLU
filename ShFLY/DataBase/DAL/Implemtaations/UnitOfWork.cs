@@ -15,8 +15,6 @@ namespace ShFLY.DataBase.DAL.Implemtaations
         private readonly ShFluContext context;
         private bool disposed;
 
-        private Dictionary<string, object> repositories;
-
         public UnitOfWork(ShFluContext context)
         {
             this.context = context;
@@ -46,22 +44,22 @@ namespace ShFLY.DataBase.DAL.Implemtaations
             this.disposed = true;
         }
 
-     
+
         public int SaveChanges()
         {
             return this.context.SaveChanges();
         }
 
-        
+
         public IRepository<MatrixWagon> MatrixWagonRepository
         {
             get { return new GenericRepository<MatrixWagon>(this.context); }
         }
-        public  IRepository<Matrixx> MatrixxRepository
+        public IRepository<Matrixx> MatrixxRepository
         {
             get { return new GenericRepository<Matrixx>(this.context); }
         }
-        public  IRepository<SmgsNakl> SmgsNaklRepository
+        public IRepository<SmgsNakl> SmgsNaklRepository
         {
             get { return new GenericRepository<SmgsNakl>(this.context); }
         }
